@@ -30,13 +30,13 @@ def initializeAll():
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
-    global bme688, errorcounter
+    global sensor_bme680, errorcounter
     try:
-        bme688 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)   #initializing the bme688 with the secondary i2c adress
-        bme688.set_humidity_oversample(bme680.OS_8X)
-        bme688.set_pressure_oversample(bme680.OS_8X)
-        bme688.set_temperature_oversample(bme680.OS_8X)
-        bme688.set_filter(bme680.FILTER_SIZE_3)
+        sensor_bme680 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)   #initializing the bme688 with the secondary i2c adress
+        sensor_bme680.set_humidity_oversample(bme680.OS_8X)
+        sensor_bme680.set_pressure_oversample(bme680.OS_8X)
+        sensor_bme680.set_temperature_oversample(bme680.OS_8X)
+        sensor_bme680.set_filter(bme680.FILTER_SIZE_3)
     except:
         writeTextToLog('Failed:     Initialisation BME688')
 
@@ -44,13 +44,13 @@ def initBME688():
         writeTextToLog("Success:        Initialisation BME688")
 
 def readBME688():
-    global errorcounter, data
+    global errorcounter, data, sensor_bme680
     writeTextToLog('Starting:       Reading BME688')
     try:
-        if bme688.get_sensor_data():
-            temperatur = bme688.data.temperature
-            pressure = bme688.data.pressure
-            humidity = bme688.data.humidity
+        if sensor_bme680.get_sensor_data():
+            temperatur = sensor_bme680.data.temperature
+            pressure = sensor_bme680.data.pressure
+            humidity = sensor_bme680.data.humidity
             data.append(temperatur,pressure,humidity)
     except:
         writeTextToLog('Failed:      Reading BME688')
