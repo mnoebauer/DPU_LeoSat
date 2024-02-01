@@ -58,21 +58,22 @@ def readBME688():
     finally:
         writeTextToLog('Success:        Reading BME688')
 
-def initRTC():
+'''def initRTC():
     global rtc #setting rtc variable global so it can be used everywhere
     i2c = board.I2C()  
     rtc = adafruit_ds3231.DS3231(i2c)   
     rtc.datetime = time.struct_time((2024,0,0,0,0,0,0,1,-1)) #setting the hours to 0 to get the start time
-
+'''
 def writeTextToLog(a):
     t = rtc.datetime
     f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
     f.write('\n') #creating a new line for every entry
-    f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
+    f.write(datetime.today().strftime('%d %H:%M:%S  '))
+    #f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
     f.write(a) #writing the content into the file
 
 def main():
-    initRTC()
+    #initRTC()
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
     initializeAll()
