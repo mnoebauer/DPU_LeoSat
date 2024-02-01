@@ -11,7 +11,7 @@ def initRTC():
 
 def writeTextToLog(a):
     t = rtc.datetime
-    f = open('data/systemlog.txt','w')
+    f = open('data/systemlog.txt','a')
     f.write('\n')
     f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec))
     f.write(a)
