@@ -13,12 +13,10 @@ def initHTE501():
         writeTextToLog('Failed:       Initialisation HTE501')
 
 def readHTE501():
-    global data
     writeTextToLog('Starting:       Reading HTE501')
     try:
         temperature,humidity = HTE_501.get_single_shot_temp_hum()
         dewpoint = HTE_501.get_dewpoint()
-        data.append(temperature,humidity,dewpoint)
     except:
         writeTextToLog('Failed:       Reading HTE501')
 
