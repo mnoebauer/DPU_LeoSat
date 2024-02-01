@@ -20,7 +20,7 @@ def main():
     #writeTextToLog('Starting:     Boot')
     initRTC()
     for i in range(10):
-        writeTextToLog(1)
+        writeTextToLog(str(1))
         time.sleep(2)
          
 if __name__ == "__main__":
