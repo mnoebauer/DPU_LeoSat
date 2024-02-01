@@ -2,6 +2,7 @@ import board
 import time
 import bme680
 import adafruit_ds3231
+import csv
 from hte501_i2c_library import HTE501
 
 def initHTE501():
@@ -53,10 +54,30 @@ def readAll():
 def initializeAll():
     writeTextToLog('Starting:       Initialisation of Sensors')
     try:
+        initCsvFile()
         initBME688()
         initHTE501()
     except:
         writeTextToLog('Failed:     Initialisation of Sensors')
+
+def initCsvFile():
+    writeTextToLog('Starting:     Initialising CSV File')
+    try:
+        with open('data/data.csv', 'a') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Zeit", "Temperatur", "Luftdruck", "Luftfeuchtigkeit", "CPU-Temperatur", "Speichernutzung", "CPU-Last", "Error-Counter"])
+    except:
+        writeTextToLog('Failed:     Initialising CSV File')
+        
+def writeCsvData(time,t,p,h,cpu_t,diskuse,cpu_l):
+    writeTextToLog('Starting:     Writing CSV File')
+    global errorCounter
+    try:
+        with open('data.csv', 'a') as file:
+            writer = csv.writer(file)
+            writer.writerow([time, t, p, h, cpu_t,diskuse,cpu_l])
+    except:
+        writeTextToLog('Failed:     Writing to CSV File') 
 
 def initRTC():
     global rtc #setting rtc variable global so it can be used everywhere
@@ -76,7 +97,9 @@ def main():
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
     initializeAll()
-    readAll()
+    while(1):
+        readAll()
+        writeCsvData()
          
 if __name__ == "__main__":
     main()
