@@ -41,7 +41,7 @@ def writeTextToLog(a):
     f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
     f.write('\n') #creating a new line for every entry
     f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
-    f.write(" " + a) #writing the content into the file
+    f.write(a) #writing the content into the file
 
 def main():
     initRTC()
