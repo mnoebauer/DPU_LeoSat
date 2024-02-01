@@ -2,31 +2,9 @@ import board
 import time
 import bme680
 import adafruit_ds3231
+from hte501_i2c_library import HTE501
 
 data = []
-
-def readAll():
-    global errorcounter
-    writeTextToLog('Starting:       Reading Sensor Data')
-    try:
-        readBME688()
-    except:
-        writeTextToLog('Failed:       Reading Sensor Data')
-
-    finally:
-        writeTextToLog('Starting:       Reading Sensor Data')
-
-def initializeAll():
-    global errorcounter
-    writeTextToLog('Starting:       Initialisation of Sensors')
-    try:
-        initBME688()
-
-    except:
-        writeTextToLog('Failed:     Initialisation of Sensors')
-
-    finally:
-        writeTextToLog('Success:     Initialisation of Sensors') 
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
@@ -57,6 +35,29 @@ def readBME688():
 
     finally:
         writeTextToLog('Success:        Reading BME688')
+        
+def readAll():
+    global errorcounter
+    writeTextToLog('Starting:       Reading Sensor Data')
+    try:
+        readBME688()
+    except:
+        writeTextToLog('Failed:       Reading Sensor Data')
+
+    finally:
+        writeTextToLog('Starting:       Reading Sensor Data')
+
+def initializeAll():
+    global errorcounter
+    writeTextToLog('Starting:       Initialisation of Sensors')
+    try:
+        initBME688()
+
+    except:
+        writeTextToLog('Failed:     Initialisation of Sensors')
+
+    finally:
+        writeTextToLog('Success:     Initialisation of Sensors') 
 
 def initRTC():
     global rtc #setting rtc variable global so it can be used everywhere
@@ -76,7 +77,7 @@ def main():
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
     initializeAll()
-    readBME688()
+    readAll()
          
 if __name__ == "__main__":
     main()
