@@ -1,7 +1,6 @@
 import board
 import time
 import bme680
-from datetime import datetime
 import adafruit_ds3231
 
 data = []
@@ -9,13 +8,11 @@ data = []
 def readAll():
     global errorcounter
     writeTextToLog('Starting:       Reading Sensor Data')
-    try:
-        readBME688()
-    except:
-        writeTextToLog('Failed:       Reading Sensor Data')
 
-    finally:
-        writeTextToLog('Starting:       Reading Sensor Data')
+    readBME688()
+
+
+
 
 def initializeAll():
     global errorcounter
@@ -45,8 +42,8 @@ def initBME688():
         writeTextToLog("Success:        Initialisation BME688")
 
 def readBME688():
-    global errorcounter, data, sensor_bme680
-    writeTextToLog('Starting:       Reading BME688')
+    global temperatur, pressure, humidity
+    writeTextToLog('Starting:       Reading Sensor Data')
     try:
         if sensor_bme680.get_sensor_data():
             temperatur = sensor_bme680.data.temperature
@@ -54,27 +51,26 @@ def readBME688():
             humidity = sensor_bme680.data.humidity
             data.append(temperatur,pressure,humidity)
     except:
-        writeTextToLog('Failed:      Reading BME688')
+        writeTextToLog('Failed:      Reading Sensor Data')
 
     finally:
-        writeTextToLog('Success:        Reading BME688')
+        writeTextToLog('Success:        Reading Sensor Data')
 
-'''def initRTC():
+def initRTC():
     global rtc #setting rtc variable global so it can be used everywhere
     i2c = board.I2C()  
     rtc = adafruit_ds3231.DS3231(i2c)   
     rtc.datetime = time.struct_time((2024,0,0,0,0,0,0,1,-1)) #setting the hours to 0 to get the start time
-'''
+
 def writeTextToLog(a):
-    #t = rtc.datetime
+    t = rtc.datetime
     f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
     f.write('\n') #creating a new line for every entry
-    f.write(datetime.today().strftime('%d %H:%M:%S  '))
-    #f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
+    f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
     f.write(a) #writing the content into the file
 
 def main():
-    #initRTC()
+    initRTC()
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
     initializeAll()
