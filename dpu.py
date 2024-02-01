@@ -4,8 +4,6 @@ import bme680
 import adafruit_ds3231
 from hte501_i2c_library import HTE501
 
-data = []
-
 def initHTE501():
     global HTE_501
     writeTextToLog('Starting:       Initialisation HTE501')
@@ -13,8 +11,6 @@ def initHTE501():
         HTE_501 = HTE501(0x40)
     except:
         writeTextToLog('Failed:       Initialisation HTE501')
-    finally:
-        writeTextToLog('Success:       Initialisation HTE501')
 
 def readHTE501():
     global data
@@ -25,9 +21,6 @@ def readHTE501():
         data.append(temperature,humidity,dewpoint)
     except:
         writeTextToLog('Failed:       Reading HTE501')
-
-    finally:
-        writeTextToLog('Success:       Reading HTE501')
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
@@ -41,9 +34,6 @@ def initBME688():
     except:
         writeTextToLog('Failed:     Initialisation BME688')
 
-    else:
-        writeTextToLog("Success:        Initialisation BME688")
-
 def readBME688():
     global errorcounter, data
     writeTextToLog('Starting:       Reading BME688')
@@ -55,9 +45,6 @@ def readBME688():
     except:
         writeTextToLog('Failed:      Reading BME688')
 
-    finally:
-        writeTextToLog('Success:        Reading BME688')
-
 def readAll():
     global errorcounter, data
     writeTextToLog('Starting:       Reading Sensor Data')
@@ -67,9 +54,6 @@ def readAll():
     except:
         writeTextToLog('Failed:       Reading Sensor Data')
 
-    finally:
-        writeTextToLog('Starting:       Reading Sensor Data')
-
 def initializeAll():
     global errorcounter
     writeTextToLog('Starting:       Initialisation of Sensors')
@@ -78,9 +62,6 @@ def initializeAll():
         initHTE501()
     except:
         writeTextToLog('Failed:     Initialisation of Sensors')
-
-    finally:
-        writeTextToLog('Success:     Initialisation of Sensors') 
 
 def initRTC():
     global rtc #setting rtc variable global so it can be used everywhere
@@ -96,6 +77,7 @@ def writeTextToLog(a):
     f.write(a) #writing the content into the file
 
 def main():
+    data = []
     initRTC()
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
