@@ -76,8 +76,11 @@ def main():
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
     initializeAll()
-    readAll()
-    writeTextToLog(str(data))
+    i = 0
+    for i in range(10):
+        readAll()
+        writeTextToLog(str(data))
+        i += 1
          
 if __name__ == "__main__":
     main()
