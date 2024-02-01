@@ -17,7 +17,7 @@ def writeTextToLog(a):
     f.write(a)
 
 def main():
-    writeTextToLog('Starting:     Boot')
+    #writeTextToLog('Starting:     Boot')
     initRTC()
     for i in range(10):
         writeTextToLog(1)
