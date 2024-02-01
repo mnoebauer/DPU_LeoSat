@@ -10,6 +10,7 @@ def initRTC():
     rtc.datetime = time.struct_time((0000,0,0,0,0,0,0,1,-1))
 
 def writeTextToLog(a):
+    global rtc
     f = open('data/systemlog.txt','a')
     f.write('\n')
     f.write(str(rtc.datetime.tm_hour)+":"+ str(rtc.datetime.tm_min)+":"+ str(rtc.datetime.tm_sec))
