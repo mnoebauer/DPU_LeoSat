@@ -6,6 +6,21 @@ from hte501_i2c_library import HTE501
 
 data = []
 
+def initHTE501():
+    global HTE_501
+    HTE_501 = HTE501(0x40)
+
+def readHTE501():
+    try:
+        temperature,humidity = HTE_501.get_single_shot_temp_hum()
+        dewpoint = HTE_501.get_dewpoint()
+
+    except:
+        writeTextToLog('Failed:       HTE501')
+
+    finally:
+        writeTextToLog('Success:       HTE501')
+
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
     global sensor_bme680, errorcounter
@@ -35,12 +50,13 @@ def readBME688():
 
     finally:
         writeTextToLog('Success:        Reading BME688')
-        
+
 def readAll():
     global errorcounter
     writeTextToLog('Starting:       Reading Sensor Data')
     try:
         readBME688()
+        readHTE501()
     except:
         writeTextToLog('Failed:       Reading Sensor Data')
 
@@ -52,7 +68,7 @@ def initializeAll():
     writeTextToLog('Starting:       Initialisation of Sensors')
     try:
         initBME688()
-
+        initHTE501()
     except:
         writeTextToLog('Failed:     Initialisation of Sensors')
 
