@@ -20,6 +20,7 @@ def main():
     initRTC()
     for i in range(10):
         writeTextToLog(1)
+        time.sleep(2)
          
 if __name__ == "__main__":
     main()
