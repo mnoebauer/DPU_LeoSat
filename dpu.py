@@ -33,7 +33,7 @@ def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
     global sensor_bme680, errorcounter
     try:
-        bme688 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)   #initializing the bme688 with the secondary i2c adress
+        bme688 = bme680.BME680()   #initializing the bme688 with the secondary i2c adress
         bme688.set_humidity_oversample(bme680.OS_8X)
         bme688.set_pressure_oversample(bme680.OS_8X)
         bme688.set_temperature_oversample(bme680.OS_8X)
