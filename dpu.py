@@ -77,6 +77,7 @@ def main():
     writeTextToLog('Starting:     Boot')
     initializeAll()
     readAll()
+    writeTextToLog(str(data))
          
 if __name__ == "__main__":
     main()
