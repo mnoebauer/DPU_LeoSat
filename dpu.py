@@ -44,7 +44,7 @@ def initBME688():
         writeTextToLog("Success:        Initialisation BME688")
 
 def readBME688():
-    global errorcounter
+    global errorcounter, data
     writeTextToLog('Starting:       Reading BME688')
     try:
         if bme688.get_sensor_data():
