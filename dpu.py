@@ -24,7 +24,7 @@ def readHTE501():
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
-    global sensor_bme680, errorcounter
+    global sensor_bme680
     try:
         sensor_bme680 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)   #initializing the bme688 with the secondary i2c adress
         sensor_bme680.set_humidity_oversample(bme680.OS_8X)
@@ -35,7 +35,6 @@ def initBME688():
         writeTextToLog('Failed:     Initialisation BME688')
 
 def readBME688():
-    global errorcounter, data
     writeTextToLog('Starting:       Reading BME688')
     try:
         if sensor_bme680.get_sensor_data():
@@ -46,7 +45,6 @@ def readBME688():
         writeTextToLog('Failed:      Reading BME688')
 
 def readAll():
-    global errorcounter, data
     writeTextToLog('Starting:       Reading Sensor Data')
     try:
         readBME688()
@@ -55,7 +53,6 @@ def readAll():
         writeTextToLog('Failed:       Reading Sensor Data')
 
 def initializeAll():
-    global errorcounter
     writeTextToLog('Starting:       Initialisation of Sensors')
     try:
         initBME688()
@@ -77,7 +74,6 @@ def writeTextToLog(a):
     f.write(a) #writing the content into the file
 
 def main():
-    data = []
     initRTC()
     writeTextToLog('Succesfull:     Initializing RTC')
     writeTextToLog('Starting:     Boot')
