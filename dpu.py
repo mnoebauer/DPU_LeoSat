@@ -7,6 +7,7 @@ errorcounter = 0
 data = []
 
 def readAll():
+    global errorcounter
     writeTextToLog('Starting:       Reading Sensor Data')
     try:
         readBME688()
@@ -17,6 +18,7 @@ def readAll():
         writeTextToLog('Starting:       Reading Sensor Data')
 
 def initializeAll():
+    global errorcounter
     writeTextToLog('Starting:       Initialisation of Sensors')
     try:
         initBME688()
@@ -29,7 +31,7 @@ def initializeAll():
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
-    global sensor_bme680
+    global sensor_bme680, errorcounter
     try:
         bme688 = bme680.BME680(bme680.I2C_ADDR_SECONDARY)   #initializing the bme688 with the secondary i2c adress
         bme688.set_humidity_oversample(bme680.OS_8X)
@@ -43,6 +45,7 @@ def initBME688():
         writeTextToLog("Success:        Initialisation BME688")
 
 def readBME688():
+    global errorcounter
     writeTextToLog('Starting:       Reading BME688')
     try:
         if sensor_bme680.get_sensor_data():
