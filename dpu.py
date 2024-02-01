@@ -65,7 +65,7 @@ def readBME688():
     rtc.datetime = time.struct_time((2024,0,0,0,0,0,0,1,-1)) #setting the hours to 0 to get the start time
 '''
 def writeTextToLog(a):
-    t = rtc.datetime
+    #t = rtc.datetime
     f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
     f.write('\n') #creating a new line for every entry
     f.write(datetime.today().strftime('%d %H:%M:%S  '))
