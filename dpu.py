@@ -8,17 +8,26 @@ data = []
 
 def initHTE501():
     global HTE_501
-    HTE_501 = HTE501(0x40)
+    writeTextToLog('Starting:       Initialisation HTE501')
+    try:
+        HTE_501 = HTE501(0x40)
+    except:
+        writeTextToLog('Failed:       Initialisation HTE501')
+    finally:
+        writeTextToLog('Success:       Initialisation HTE501')
 
 def readHTE501():
+    global data
+    writeTextToLog('Starting:       Reading HTE501')
     try:
         temperature,humidity = HTE_501.get_single_shot_temp_hum()
         dewpoint = HTE_501.get_dewpoint()
+        data.append(temperature,humidity,dewpoint)
     except:
-        writeTextToLog('Failed:       HTE501')
+        writeTextToLog('Failed:       Reading HTE501')
 
     finally:
-        writeTextToLog('Success:       HTE501')
+        writeTextToLog('Success:       Reading HTE501')
 
 def initBME688():
     writeTextToLog('Starting:       Initialisation BME688')
@@ -50,7 +59,7 @@ def readBME688():
         writeTextToLog('Success:        Reading BME688')
 
 def readAll():
-    global errorcounter
+    global errorcounter, data
     writeTextToLog('Starting:       Reading Sensor Data')
     try:
         readBME688()
