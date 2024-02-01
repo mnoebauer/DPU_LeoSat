@@ -14,7 +14,6 @@ def readHTE501():
     try:
         temperature,humidity = HTE_501.get_single_shot_temp_hum()
         dewpoint = HTE_501.get_dewpoint()
-        data.append(temperature,humidity)
     except:
         writeTextToLog('Failed:       HTE501')
 
@@ -44,7 +43,6 @@ def readBME688():
             temperatur = sensor_bme680.data.temperature
             pressure = sensor_bme680.data.pressure
             humidity = sensor_bme680.data.humidity
-            data.append(temperatur,pressure,humidity)
     except:
         writeTextToLog('Failed:      Reading BME688')
 
