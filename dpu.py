@@ -14,7 +14,7 @@ def readHTE501():
     try:
         temperature,humidity = HTE_501.get_single_shot_temp_hum()
         dewpoint = HTE_501.get_dewpoint()
-
+        data.append(temperature,humidity)
     except:
         writeTextToLog('Failed:       HTE501')
 
