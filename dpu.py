@@ -8,6 +8,7 @@ import bma400
 from PiicoDev_MS5637 import PiicoDev_MS5637
 import wiringpi
 import RP.GPIO as GPIO
+from camtest import camclass
 
 ConfirmAlivePin = 17
 
