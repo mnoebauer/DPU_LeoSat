@@ -81,27 +81,6 @@ def readBME688():
     except:
         writeTextToLog('Failed:      Reading BME688')
 
-def readAll():
-    writeTextToLog('Starting:       Reading Sensor Data')
-    try:
-        readBME688()
-        readHTE501()
-        readBMA400()
-        readMS5637()
-    except:
-        writeTextToLog('Failed:       Reading Sensor Data')
-
-def initializeAll():
-    writeTextToLog('Starting:       Initialisation of Sensors')
-    try:
-        initCsvFile()
-        initBME688()
-        initHTE501()
-        initBMA400()
-        initMS5637()
-    except:
-        writeTextToLog('Failed:     Initialisation of Sensors')
-
 def initCsvFile():
     writeTextToLog('Starting:     Initialising CSV File')
     try:
@@ -138,6 +117,27 @@ def writeTextToLog(a):
     f.write('\n') #creating a new line for every entry
     f.write(getTime()) #documenting the time on every entry
     f.write(a) #writing the content into the file
+
+def readAll():
+    writeTextToLog('Starting:       Reading Sensor Data')
+    try:
+        readBME688()
+        readHTE501()
+        readBMA400()
+        readMS5637()
+    except:
+        writeTextToLog('Failed:       Reading Sensor Data')
+
+def initializeAll():
+    writeTextToLog('Starting:       Initialisation of Sensors')
+    try:
+        initCsvFile()
+        initBME688()
+        initHTE501()
+        initBMA400()
+        initMS5637()
+    except:
+        writeTextToLog('Failed:     Initialisation of Sensors')
 
 def main():
     initRTC()
