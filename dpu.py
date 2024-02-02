@@ -6,6 +6,27 @@ import csv
 from hte501_i2c_library import HTE501
 import bma400
 from PiicoDev_MS5637 import PiicoDev_MS5637
+import wiringpi
+import RP.GPIO as GPIO
+
+ConfirmAlivePin = 17
+
+def initConfirmAlive():
+    writeTextToLog('Starting:     Initialisitation Alive Signal')
+    try:
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(ConfirmAlivePin, GPIO.OUT)
+    except:
+        writeTextToLog('Failed:     Initialisation Alive Signal')
+
+def ConfirmAlive():
+    writeTextToLog('Starting:     Sending Alive Signal')
+    try:    
+        GPIO.output(ConfirmAlivePin,1)
+        time.sleep(0.1)
+        GPIO.output(ConfirmAlivePin,0)
+    except:
+        writeTextToLog('Failed:     Sending Alive Signal')
 
 def initMS5637():
     global ms5637
@@ -131,6 +152,7 @@ def readAll():
 def initializeAll():
     writeTextToLog('Starting:       Initialisation of Sensors')
     try:
+        initConfirmAlive()
         initCsvFile()
         initBME688()
         initHTE501()
@@ -145,8 +167,10 @@ def main():
     writeTextToLog('Starting:     Boot')
     initializeAll()
     while(1):
+        ConfirmAlive()
         readAll()
         writeCsvData()
+        time.sleep(1)
          
 if __name__ == "__main__":
     main()
