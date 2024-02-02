@@ -16,7 +16,7 @@ def initHTE501():
 def readHTE501():
     writeTextToLog('Starting:       Reading HTE501')
     try:
-        temperature,humidity = HTE_501.get_single_shot_temp_hum()
+        temperature_hte501,humidity_hte501 = HTE_501.get_single_shot_temp_hum()
         dewpoint = HTE_501.get_dewpoint()
     except:
         writeTextToLog('Failed:       Reading HTE501')
@@ -72,6 +72,7 @@ def initCsvFile():
 def writeCsvData(time,t,p,h,cpu_t,diskuse,cpu_l):
     writeTextToLog('Starting:     Writing CSV File')
     global errorCounter
+    time = getTime()
     try:
         with open('data.csv', 'a') as file:
             writer = csv.writer(file)
@@ -85,11 +86,16 @@ def initRTC():
     rtc = adafruit_ds3231.DS3231(i2c)   
     rtc.datetime = time.struct_time((2024,0,0,0,0,0,0,1,-1)) #setting the hours to 0 to get the start time
 
+def getTime():
+    r = rtc.datetime
+    t = str(r.tm_hour) +":"+ str(r.tm_min)+":"+ str(r.tm_sec)
+    return t
+
 def writeTextToLog(a):
     t = rtc.datetime
     f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
     f.write('\n') #creating a new line for every entry
-    f.write(str(t.tm_hour)+":"+ str(t.tm_min)+":"+ str(t.tm_sec)) #documenting the time on every entry
+    f.write(getTime()) #documenting the time on every entry
     f.write(a) #writing the content into the file
 
 def main():
