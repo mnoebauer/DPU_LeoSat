@@ -5,6 +5,24 @@ import adafruit_ds3231
 import csv
 from hte501_i2c_library import HTE501
 import bma400
+from PiicoDev_MS5637 import PiicoDev_MS5637
+
+def initMS5637():
+    global ms5637
+    writeTextToLog('Starting:       Initialisation MS5637')
+    try:
+        ms5637 = PiicoDev_MS5637()
+    except:
+        writeTextToLog('Failed:       Initialisation MS5637')
+
+def readMS5637():
+    global ms_h, altitude
+    writeTextToLog('Starting:       Reading MS5637')
+    try:
+        ms_h = ms5637.read_pressure()
+        altitude = ms5637.read_altitude()
+    except:
+        writeTextToLog('Failed:       Reading MS5637')
 
 def initBMA400():
     global mbma400
@@ -69,6 +87,7 @@ def readAll():
         readBME688()
         readHTE501()
         readBMA400()
+        readMS5637()
     except:
         writeTextToLog('Failed:       Reading Sensor Data')
 
@@ -79,6 +98,7 @@ def initializeAll():
         initBME688()
         initHTE501()
         initBMA400()
+        initMS5637()
     except:
         writeTextToLog('Failed:     Initialisation of Sensors')
 
@@ -97,7 +117,7 @@ def writeCsvData():
     try:
         with open('data.csv', 'a') as file:
             writer = csv.writer(file)
-            writer.writerow([time, temp,temperature_hte501, p, h, dewpoint, accx, accy, accz])
+            writer.writerow([time, temp,temperature_hte501, p, h, ms_h, dewpoint, altitude, accx, accy, accz])
     except:
         writeTextToLog('Failed:     Writing to CSV File') 
 
