@@ -17,3 +17,5 @@ Then add the following line at the bottom of the .bashrc file:
 
 python dpu.py & python cam.py
 
+Now the both files run at the startup.
+
