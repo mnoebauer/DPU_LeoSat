@@ -4,6 +4,24 @@ import bme680
 import adafruit_ds3231
 import csv
 from hte501_i2c_library import HTE501
+import bma400
+
+def initBMA400():
+    global mbma400
+    writeTextToLog('Starting:       Initialisation BMA400')
+    try:
+        i2c = board.I2C()
+        mbma400 = bma400.BMA400(i2c)
+    except:
+        writeTextToLog('Failed:       Initialisation BMA400')
+
+def readBMA400():
+    global accx,accy,accz
+    writeTextToLog('Starting:       Reading BMA400')
+    try:
+        accx, accy, accz = mbma400.acceleration
+    except:
+        writeTextToLog('Failed:       Reading BMA400')
 
 def initHTE501():
     global HTE_501
@@ -14,6 +32,7 @@ def initHTE501():
         writeTextToLog('Failed:       Initialisation HTE501')
 
 def readHTE501():
+    global temperature_hte501, humidity_hte501, dewpoint
     writeTextToLog('Starting:       Reading HTE501')
     try:
         temperature_hte501,humidity_hte501 = HTE_501.get_single_shot_temp_hum()
@@ -34,12 +53,13 @@ def initBME688():
         writeTextToLog('Failed:     Initialisation BME688')
 
 def readBME688():
+    global temp, p, h
     writeTextToLog('Starting:       Reading BME688')
     try:
         if sensor_bme680.get_sensor_data():
-            temperatur = sensor_bme680.data.temperature
-            pressure = sensor_bme680.data.pressure
-            humidity = sensor_bme680.data.humidity
+            temp = sensor_bme680.data.temperature
+            p = sensor_bme680.data.pressure
+            h = sensor_bme680.data.humidity
     except:
         writeTextToLog('Failed:      Reading BME688')
 
@@ -48,6 +68,7 @@ def readAll():
     try:
         readBME688()
         readHTE501()
+        readBMA400()
     except:
         writeTextToLog('Failed:       Reading Sensor Data')
 
@@ -57,6 +78,7 @@ def initializeAll():
         initCsvFile()
         initBME688()
         initHTE501()
+        initBMA400()
     except:
         writeTextToLog('Failed:     Initialisation of Sensors')
 
@@ -69,14 +91,13 @@ def initCsvFile():
     except:
         writeTextToLog('Failed:     Initialising CSV File')
         
-def writeCsvData(time,t,p,h,cpu_t,diskuse,cpu_l):
+def writeCsvData():
     writeTextToLog('Starting:     Writing CSV File')
-    global errorCounter
     time = getTime()
     try:
         with open('data.csv', 'a') as file:
             writer = csv.writer(file)
-            writer.writerow([time, t, p, h, cpu_t,diskuse,cpu_l])
+            writer.writerow([time, temp,temperature_hte501, p, h, dewpoint, accx, accy, accz])
     except:
         writeTextToLog('Failed:     Writing to CSV File') 
 
