@@ -1,7 +1,7 @@
 import asyncio
-from Drivers import ms5637
+from Drivers import ms5637, bma400
 
-def flightStageEstimation():
+async def flightStageEstimation():
    """
    0... Grounded
    1... Starting
@@ -10,4 +10,9 @@ def flightStageEstimation():
    4...Parachute
    """
    alt = ms5637.ms5637.read()
+   accx,acc,y,accz = bma400.bma400.read()
+
+   
+
+
    
