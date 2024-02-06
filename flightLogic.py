@@ -1,18 +1,14 @@
 import asyncio
 from Drivers import ms5637, bma400
+from Drivers import heartbeat
 
-async def flightStageEstimation():
-   """
-   0... Grounded
-   1... Starting
-   2... Rising
-   3... Freefall
-   4...Parachute
-   """
-   alt = ms5637.ms5637.read()
-   accx,acc,y,accz = bma400.bma400.read()
+def __main__():
+    asyncio.run(logic())
 
-   
+async def logic():
+    tasks = []
+    tasks.append(asyncio.create_task(heartbeat.heartbeart.run()))
 
-
-   
+async def gatherData():
+    dataTasks = []
+    dataTasks.append()

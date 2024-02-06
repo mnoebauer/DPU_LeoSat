@@ -1,7 +1,6 @@
 import board
 import time
 import RP.GPIO as GPIO
-import asyncio
 
 class heartbeart():
     def __init__(self) -> None:
