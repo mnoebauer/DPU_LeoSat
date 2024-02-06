@@ -13,4 +13,4 @@ async def mainFlightLogic():
     """
     tasks = []
     tasks.append(asyncio.create_task(heartbeat.heartbeart.run())) #start Heartbeat to show Watchdog DPU is alive
-    tasks.append(asyncio.create_task(getSensorData.DataSaver.collectData())) #start collecting and saving data
+    tasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #start collecting and saving data
