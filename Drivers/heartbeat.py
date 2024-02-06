@@ -1,9 +1,9 @@
 import board
 import asyncio
 import time
-import RP.GPIO as GPIO
+import RPi.GPIO as GPIO
 
-class heartbeart():
+class heartbeart:
     """
     Driver class for the "Hearbeat" that sends a signal every 2 Minutes 
     to the Watchdog that the DPU is still alive
