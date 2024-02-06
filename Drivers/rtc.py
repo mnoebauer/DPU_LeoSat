@@ -2,6 +2,9 @@ import adafruit_ds3231
 import board
 
 class RTC:
+    """
+    Driver for the DS3231 RTC Module to get the time
+    """
     def read():
         i2c = board.I2C()
         rtc = adafruit_ds3231(i2c)
