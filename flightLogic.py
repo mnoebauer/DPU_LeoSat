@@ -15,16 +15,16 @@ async def mainFlightLogic():
     It constantly gets the sensor data and saves it
     """
 
+    highPriorityTasks = []
+    mainTasks = []
+    cameraTasks = []
+
     bootLogic() #running boot logic
 
-    highPriorityTasks = []
     highPriorityTasks.append(asyncio.create_task(heartbeat.heartbeart.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
-
-    mainTasks = []
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor Data
 
     #following loop runs constanly
-    cameraTasks = []
     while True:
 
         #calculate already rAltitude(risen altitude) (cAltitude(currentAltitude) - startAltitude)
@@ -47,6 +47,7 @@ async def mainFlightLogic():
             print("bla")
             #run continous picture taking task
 
+        await asyncio.sleep(30)
 
 def bootLogic():
     """
