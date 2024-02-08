@@ -15,7 +15,7 @@ async def mainFlightLogic():
     It constantly gets the sensor data and saves it
     """
 
-    bootLogic() #running boot logic to update the reference values
+    bootLogic() #running boot logic
 
     highPriorityTasks = []
     highPriorityTasks.append(asyncio.create_task(heartbeat.heartbeart.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
@@ -35,7 +35,7 @@ def bootLogic():
     the DPU got booted up
     """
 
-    f = open('data/bootcycles.txt','r') #opening the startAltitude text file in write mode
+    f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
     bootnumber = f.readline()
     f.close()
 
