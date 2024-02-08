@@ -1,6 +1,6 @@
 import csv
 import asyncio
-from Drivers import bma400, HTE501, ms5637, rtc, bme688
+from Drivers import bma400, HTE501, ms5637, rtc, bme688, rtc
 
 data = []
 
@@ -11,31 +11,49 @@ class DataScraper:
     async def collectData():
         global data
         while True:
+            #reading time
+            try:
+                data.append(rtc.RTC.read())
+            except:
+                writeToLog("RTC reading failed")
+                data.append("NaN")
+
+            #reading gas resistance
             try:
                 data.append(bme688.BME680.read())
             except:
                 writeToLog("BME688 reading failed")
                 data.append("NaN")
             
+            #reading temperature and humidity
             try:
-                data.append(HTE501.HTE.read())
+                temp,hum = HTE501.HTE.read()
+                data.append(temp)
+                data.append(hum)
             except:
                 writeToLog("HTE501 reading failed")
                 data.append("NaN")
-        
+                data.append("NaN")
+
+            #reading x,y,z acceleration
             try:
-                data.append(bma400.bma400.read())
+                accx,accy,accz = bma400.bma400.read()
+                data.append(accx)
+                data.append(accy)
+                data.append(accz)
             except:
                 writeToLog("BMM400 reading failed")
                 data.append("NaN")
 
+            #reading altitude
             try:
                 data.append(ms5637.ms5637.read())
             except:
                 writeToLog("Ms5637 reading fialed")
                 data.append("NaN")
 
-
+            writeCsvData(data)
+            data.clear()
             asyncio.sleep(3)
 
 def writeToLog(x):
