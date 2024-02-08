@@ -25,4 +25,3 @@ def bootLogic():
     f = open('data/systemlog.txt','w') #opening the startAltitude text file in write mode
     f.write(altitude) #writing current alitude to file
     f.close() #closing file
-
