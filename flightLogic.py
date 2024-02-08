@@ -1,6 +1,8 @@
 import asyncio
 from Drivers import heartbeat, ms5637
 import getSensorData
+import pandas as pd
+import csv
 
 def __main__():
     asyncio.run((mainFlightLogic()))
@@ -12,6 +14,7 @@ async def mainFlightLogic():
     It constantly runs the heartbeat to show the watchdog that it is alive
     It constantly gets the sensor data and saves it
     """
+
     bootLogic() #running boot logic to update the reference values
 
     highPriorityTasks = []
@@ -23,12 +26,21 @@ async def mainFlightLogic():
     #following loop runs constanly
     #TO DO while true loop for transmisson, height, etc...
 
+
 def bootLogic():
-    altitude = ms5637.ms5637.read()
+    altitude = ms5637.ms5637.read() #reading altitude from ms5637
 
     #only writes it to the file if a boot/restart occurs under 1km, tp get a real reference height
     if altitude < 1000:
         f = open('data/startAltitude.txt','w') #opening the startAltitude text file in write mode
         f.write(altitude) #writing current alitude to file
         f.close() #closing file
+
+    #wrtiting csv headers if not done yet
+    df = pd.read_csv("data/data.csv")
+    if df.empty:
+        with open('data/data.csv','w') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Zeit", "Temperatur", "Luftdruck", "Luftfeuchtigkeit", "CPU-Temperatur", "Speichernutzung", "CPU-Last", "Error-Counter"])
+
     
