@@ -38,6 +38,8 @@ async def mainFlightLogic():
         if rAltitude < 1000:
             print("bla")
             #start video recording if not already running
+            
+        #35km is the estimation of the expolsion of the ballon
         elif rAltitude > 34000:
             print("bla")
             #start video recording if not already running
