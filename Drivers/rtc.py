@@ -1,5 +1,6 @@
 import adafruit_ds3231
 import board
+import time
 
 class RTC:
     """
