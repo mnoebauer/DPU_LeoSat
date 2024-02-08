@@ -19,9 +19,15 @@ async def mainFlightLogic():
     mainTasks = []
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor Data
 
+    #following loop runs constanly
+    
+
 def bootLogic():
     altitude = ms5637.ms5637.read()
+
+    #only writes it to the file if a boot/restart occurs under 1km, tp get a real reference height
+    if altitude < 1000:
+        f = open('data/systemlog.txt','w') #opening the startAltitude text file in write mode
+        f.write(altitude) #writing current alitude to file
+        f.close() #closing file
     
-    f = open('data/systemlog.txt','w') #opening the startAltitude text file in write mode
-    f.write(altitude) #writing current alitude to file
-    f.close() #closing file
