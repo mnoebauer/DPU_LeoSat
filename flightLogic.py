@@ -39,7 +39,7 @@ def bootLogic():
     bootnumber = f.readline()
     f.close()
 
-    #0 is the initial value at the start
+    #0 is the initial value at the start, during the launch it should be the first boot
     if bootnumber == 0:
         rtc.RTC.set() #on first boot set time to 00:00:00
         altitude = ms5637.ms5637.read() #reading altitude on first boot to get reference
