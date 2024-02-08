@@ -3,7 +3,9 @@ import asyncio
 import RPi.GPIO as GPIO
 
 class Transmission:
-
+    """
+    Class for transmitting the data to the communication pcb
+    """
     def send():
         """
         send function
