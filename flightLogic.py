@@ -24,15 +24,15 @@ async def mainFlightLogic():
     highPriorityTasks.append(asyncio.create_task(heartbeat.heartbeart.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor Data
 
+    f = open('data/startAltitude.txt','r') #open startAltitude file in read mode
+    sAltitude = f.readline()
+    f.close()
+
     #following loop runs constanly
     while True:
-
-        #calculate already rAltitude(risen altitude) (cAltitude(currentAltitude) - startAltitude)
-        f = open('data/startAltitude.txt','r') #open startAltitude file in read mode
-        startAltitude = f.readline()
-        f.close()
+        #calculate rAltitude(risen altitude) =  (cAltitude(currentAltitude) - sAltitude(start Altitude))
         cAltitude = ms5637.ms5637.read()
-        rAltitude = cAltitude - startAltitude
+        rAltitude = cAltitude - sAltitude
 
         #camera mode 
         if rAltitude < 1000:
@@ -47,7 +47,7 @@ async def mainFlightLogic():
             print("bla")
             #run continous picture taking task
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(60) #refresh e
 
 def bootLogic():
     """
