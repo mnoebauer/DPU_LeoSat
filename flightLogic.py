@@ -58,4 +58,4 @@ def bootLogic():
     if df.empty:
         with open('data/data.csv','w') as file:
             writer = csv.writer(file)
-            writer.writerow(["Zeit", "Temperatur", "Luftdruck", "Luftfeuchtigkeit", "CPU-Temperatur", "Speichernutzung", "CPU-Last", "Error-Counter"])
+            writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration", "Altitude"])
