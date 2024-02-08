@@ -46,9 +46,6 @@ async def mainFlightLogic():
             #run continous picture taking task
 
 
-
-
-
 def bootLogic():
     """
     Boot Logic is called first on Boot,
