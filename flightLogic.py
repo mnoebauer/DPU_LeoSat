@@ -1,5 +1,5 @@
 import asyncio
-from Drivers import heartbeat, ms5637
+from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import pandas as pd
 import csv
@@ -28,13 +28,30 @@ async def mainFlightLogic():
 
 
 def bootLogic():
-    altitude = ms5637.ms5637.read() #reading altitude from ms5637
+    """
+    Boot Logic is called first on Boot,
+    there is will be a reference for the altitude set
+    and the time set to 00:00:00, also it records how many times 
+    the DPU got booted up
+    """
 
-    #only writes it to the file if a boot/restart occurs under 1km, tp get a real reference height
-    if altitude < 1000:
-        f = open('data/startAltitude.txt','w') #opening the startAltitude text file in write mode
-        f.write(altitude) #writing current alitude to file
-        f.close() #closing file
+    f = open('data/bootcycles.txt','r') #opening the startAltitude text file in write mode
+    bootnumber = f.readline()
+    f.close()
+
+    #0 is the initial value at the start
+    if bootnumber == 0:
+        rtc.RTC.set() #on first boot set time to 00:00:00
+        altitude = ms5637.ms5637.read() #reading altitude on first boot to get reference
+        f = open('data/startAltitude.txt','w')
+        f.write(altitude)
+        f.close()
+    
+    #old bootnumber +1 because there was one
+    f = open('data/bootcycles.txt','w')
+    newBootnumber = bootnumber + 1
+    f.write(newBootnumber)
+    f.close()
 
     #wrtiting csv headers if not done yet
     df = pd.read_csv("data/data.csv")
@@ -42,5 +59,3 @@ def bootLogic():
         with open('data/data.csv','w') as file:
             writer = csv.writer(file)
             writer.writerow(["Zeit", "Temperatur", "Luftdruck", "Luftfeuchtigkeit", "CPU-Temperatur", "Speichernutzung", "CPU-Last", "Error-Counter"])
-
-    
