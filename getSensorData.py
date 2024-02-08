@@ -1,6 +1,6 @@
 import csv
 import asyncio
-from Drivers import bma400, HTE501, ms5637, rtc
+from Drivers import bma400, HTE501, ms5637, rtc, bme688
 
 data = []
 
@@ -12,19 +12,30 @@ class DataScraper:
         global data
         while True:
             try:
+                data.append(bme688.BME680.read())
+            except:
+                writeToLog("BME688 reading failed")
+                data.append("NaN")
+            
+            try:
                 data.append(HTE501.HTE.read())
             except:
                 writeToLog("HTE501 reading failed")
-            
+                data.append("NaN")
+        
             try:
                 data.append(bma400.bma400.read())
             except:
-                writeToLog("HTE501 reading failed")
+                writeToLog("BMM400 reading failed")
+                data.append("NaN")
 
             try:
                 data.append(ms5637.ms5637.read())
             except:
                 writeToLog("Ms5637 reading fialed")
+                data.append("NaN")
+
+
             asyncio.sleep(3)
 
 def writeToLog(x):
