@@ -24,7 +24,29 @@ async def mainFlightLogic():
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor Data
 
     #following loop runs constanly
-    #TO DO while true loop for transmisson, height, etc...
+    cameraTasks = []
+    while True:
+
+        #calculate already rAltitude(risen altitude) (cAltitude(currentAltitude) - startAltitude)
+        f = open('data/startAltitude.txt','r') #open startAltitude file in read mode
+        startAltitude = f.readline()
+        f.close()
+        cAltitude = ms5637.ms5637.read()
+        rAltitude = cAltitude - startAltitude
+
+        #camera mode 
+        if rAltitude < 1000:
+            print("bla")
+            #start video recording if not already running
+        elif rAltitude > 34000:
+            print("bla")
+            #start video recording if not already running
+        else:
+            print("bla")
+            #run continous picture taking task
+
+
+
 
 
 def bootLogic():
