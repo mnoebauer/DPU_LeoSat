@@ -24,6 +24,8 @@ the information contained in this document.
 
 
 # pylint: disable=E0401
+import sys
+sys.path
 from smbus2 import SMBus, i2c_msg
 import numpy as np
 # pylint: enable=E0401
