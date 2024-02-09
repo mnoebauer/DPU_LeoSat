@@ -2,6 +2,7 @@
 # Ported to MicroPython by Peter Johnston at Core Electronics MAY 2021
 # Original repo https://github.com/TEConnectivity/piweathershield-python/tree/67fa820647fafa5a1a7a5a4828ee13d80a60a279
 
+from lib import PiicoDev_Unified
 from PiicoDev_Unified import *
 
 compat_str = '\nUnified PiicoDev library out of date.  Get the latest module: https://piico.dev/unified \n'
