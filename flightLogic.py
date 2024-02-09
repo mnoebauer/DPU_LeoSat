@@ -1,7 +1,6 @@
 import sys
 sys.path
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
 import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
