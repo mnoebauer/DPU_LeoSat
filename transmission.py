@@ -47,6 +47,12 @@ async def waitForResponse():
     return r
     
 async def transmit():
+    """
+    Function that gets the number of the row of the csv file that got sent last time
+    increments that und gets the new row. Then establishes the UART connection an sends the data.
+    At last the index of the row gets wirtten to the file again.
+    """
+
     f = open('data/lastDataSent.txt','r') #opening the systemlog text file in append mode
     oldRow = f.read() #
     f.close()
@@ -58,5 +64,9 @@ async def transmit():
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
     
     wiringpi.wiringPiSetup()
-    serial = wiringpi.serialOpen('/dev/ttyAMA0',9600)
-    wiringpi.serialPuts(serial,rowToSend)
+    serial = wiringpi.serialOpen('/dev/ttyAMA0',115200) #115200 Baudrate
+    wiringpi.serialPuts(serial,rowToSend) #sends the selected row to com pcb
+
+    f = open('data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
+    f.write(numOfRow) #write the number of the row that got sent to the text file
+    f.close()
