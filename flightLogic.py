@@ -70,7 +70,7 @@ def bootLogic():
     #0 is the initial value at the start, during the launch it should be the first boot
     altitude = ms5637Obj.read() #reading altitude on first boot to get reference
     f = open('data/startaltitude.txt','w')
-    f.write(altitude)
+    f.write(str(altitude))
     f.close()
     """
     if bootnumber == 0:
