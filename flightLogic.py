@@ -33,7 +33,7 @@ async def mainFlightLogic():
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
     startAltitude = f.read()
     print("startaltitude:"+ startAltitude)
-    sAltitude = int(startAltitude)
+    sAltitude = float(startAltitude)
     f.close()
 
     #following loop runs constanly
