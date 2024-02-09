@@ -1,6 +1,6 @@
 import csv
 import asyncio
-from drivers import bma400, HTE501, ms5637, rtc, bme688, rtc
+from drivers import bma400, HTE501, ms5637, rtc, bme688, rtc, gps
 
 data = []
 
@@ -49,7 +49,15 @@ class DataScraper:
             try:
                 data.append(ms5637.ms5637.read())
             except:
-                writeToLog("Ms5637 reading fialed")
+                writeToLog("Ms5637 reading failed")
+                data.append("NaN")
+
+            try:
+                data.append(gps.GPS.read())
+            except:
+                writeToLog("GPS reading failed")
+                data.append("NaN")
+                data.append("NaN")
                 data.append("NaN")
 
             writeCsvData(data)
