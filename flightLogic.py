@@ -4,9 +4,9 @@ sys.path
 import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
-import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
-import pandas as pd
+#import warnings
+#warnings.simplefilter(action='ignore', category=FutureWarning)
+#import pandas as pd
 import csv
 
 def __main__():
@@ -77,7 +77,7 @@ def bootLogic():
     newBootnumber = bootnumber + 1
     f.write(newBootnumber)
     f.close()
-
+"""
     #wrtiting csv headers if not done yet
     df = pd.read_csv("data/data.csv")
     if df.empty:
@@ -85,3 +85,4 @@ def bootLogic():
             writer = csv.writer(file)
             writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
                               "Altitude", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
+"""
