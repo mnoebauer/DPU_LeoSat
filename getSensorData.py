@@ -73,7 +73,7 @@ class DataScraper:
             asyncio.sleep(3)
 
 def writeToLog(x):
-       t = rtc.RTC.read()
+       t = rtc.RTC.read(self)
        f = open('data/systemlog.txt','a') #opening the systemlog text file in append mode
        f.write('\n') #creating a new line for every entry
        f.write(t) #documenting the time on every entry
