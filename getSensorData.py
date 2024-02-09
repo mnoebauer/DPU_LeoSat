@@ -79,8 +79,7 @@ def writeToLog(x):
        f.write(t) #documenting the time on every entry
        f.write(x) #writing the content into the file 
     
-def writeCsvData():
-    global data
+def writeCsvData(d):
     with open('data/data.csv','a') as file:
         writer = csv.writer(file)
-        writer.writerow(data)        
+        writer.writerow(d)        
