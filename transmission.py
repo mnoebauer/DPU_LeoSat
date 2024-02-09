@@ -25,25 +25,29 @@ class Transmission:
 
 
 async def activateCom():
+    """
+    Sending a High Signal to communication pcb to wake up the controller
+    """
     GPIO.setmode(GPIO.Board)
     GPIO.setup(27,GPIO.OUT,initial = GPIO.LOW)
 
     GPIO.output(27,1)
-    await asyncio.sleep(1)
+    await asyncio.sleep(0.1)
     GPIO.output(27,0)
 
 async def waitForResponse():
+    """
+    Setting pin to input and waiting 1 second for an acknowledge from the communication pcb.
+    If acknowledge came within that time, the variable gets set true, if not the on false.
+    """
     GPIO.setmode(GPIO.Board)
     GPIO.setup(27,GPIO.IN)
 
-    channel = GPIO.wait_for_edge(27, GPIO_RISING, timeout = 5000)
-    await asyncio.sleep(3)
+    channel = GPIO.wait_for_edge(27, GPIO_RISING, timeout = 1000)
     if channel is None:
         r = False
-        print("Timeout occured")
     else:
         r = True
-        print("Edge detected on channel")
     return r
     
 async def transmit():
