@@ -10,6 +10,8 @@ class DataScraper:
     """
     async def collectData():
         global data
+        b400 = bma400.bma400()
+        
         while True:
             #reading time
             try:
@@ -70,7 +72,7 @@ class DataScraper:
 
             writeCsvData(data)
             data.clear()
-            asyncio.sleep(3)
+            await asyncio.sleep(3)
 
 def writeToLog(x):
        t = rtc.RTC()

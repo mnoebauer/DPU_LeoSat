@@ -5,7 +5,8 @@ class bma400():
     """
     Driver for the Bosch BMA400 acceleration sensor
     """
-    def read():
-        i2c = board.I2C()
-        mbma = bma400.BMA400(i2c)
-        return mbma.acceleration
+    i2c = board.I2C()
+    mbma = bma400.BMA400(i2c)
+
+    def read(self):
+        return self.mbma.acceleration

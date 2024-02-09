@@ -47,7 +47,7 @@ async def mainFlightLogic():
             print("bla")
             #run continous picture taking task
 
-        await asyncio.sleep(60) #refresh e
+        await asyncio.sleep(60) #refresh
 
 def bootLogic():
     """
