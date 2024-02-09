@@ -12,8 +12,8 @@ hte501_i2c_library.py is the library to use the HTE501 from E+E (https://github.
 
 First setup Auto-Login into the console in the raspi-config option.
 Then add the following line at the bottom of the .bashrc file:
-'''
+```
 python flightLogic.py
-'''
+```
 
 Now the file is run at the boot of the RPI.
