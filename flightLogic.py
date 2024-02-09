@@ -29,7 +29,7 @@ async def mainFlightLogic():
     highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
-    f = open('data/startAltitude.txt','r') #open startAltitude file in read mode
+    f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
     sAltitude = f.readline()
     f.close()
 
