@@ -66,10 +66,12 @@ async def transmit():
     with open("data/data.csv") as fd:
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
-    
-    wiringpi.wiringPiSetup()
-    serial = wiringpi.serialOpen('/dev/ttyAMA0',115200) #115200 Baudrate
-    wiringpi.serialPuts(serial,rowToSend) #sends the selected row to com pcb
+    try:
+        wiringpi.wiringPiSetup()
+        serial = wiringpi.serialOpen('/dev/ttyAMA0',115200) #115200 Baudrate
+        wiringpi.serialPuts(serial,rowToSend) #sends the selected row to com pcb
+    except:
+        print("com failed")
 
     f = open('data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
     f.write(numOfRow) #write the number of the row that got sent to the text file
