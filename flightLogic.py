@@ -32,6 +32,7 @@ async def mainFlightLogic():
 
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
     startAltitude = f.readline()
+    print("startaltitude:"+ startAltitude)
     sAltitude = int(startAltitude)
     f.close()
 
