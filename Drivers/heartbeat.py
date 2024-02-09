@@ -1,6 +1,4 @@
-import board
 import asyncio
-import time
 import RPi.GPIO as GPIO
 
 class heartbeart:
@@ -10,8 +8,8 @@ class heartbeart:
     """
 
     async def run(self):
-        GPIO.setmode(GPIO.Board)
-        GPIO.setup(17,GPIO.OUT,initial = GPIO.LOW)
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(17,GPIO.OUT, initial = GPIO.LOW)
         while True:
             GPIO.output(17,1)
             await asyncio.sleep(0.5)
