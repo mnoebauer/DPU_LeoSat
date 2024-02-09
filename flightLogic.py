@@ -9,9 +9,7 @@ import getSensorData
 #import pandas as pd
 import csv
 
-def __main__():
-    print("hello")
-    asyncio.run((mainFlightLogic()))
+
 
 async def mainFlightLogic():
     """
@@ -86,3 +84,10 @@ def bootLogic():
             writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
                               "Altitude", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
 """
+
+def main():
+    print("hello")
+    asyncio.run((mainFlightLogic()))
+
+if __name__ == '__main__':
+    main()
