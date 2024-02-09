@@ -18,7 +18,6 @@ async def mainFlightLogic():
     It constantly runs the heartbeat to show the watchdog that it is alive
     It constantly gets the sensor data and saves it
     """
-    print("what")
 
     highPriorityTasks = []
     mainTasks = []
@@ -73,7 +72,7 @@ def bootLogic():
     #old bootnumber +1 because there was one
     f = open('data/bootcycles.txt','w')
     newBootnumber = bootnumber + 1
-    f.write(newBootnumber)
+    f.write(str(newBootnumber))
     f.close()
 """
     #wrtiting csv headers if not done yet
@@ -86,7 +85,6 @@ def bootLogic():
 """
 
 def main():
-    print("hello")
     asyncio.run((mainFlightLogic()))
 
 if __name__ == '__main__':
