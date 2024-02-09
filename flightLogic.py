@@ -31,8 +31,8 @@ async def mainFlightLogic():
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
-    sAltitude = f.readline()
-    sAltitude = float(sAltitude)
+    startAltitude = f.readline()
+    sAltitude = float(startAltitude)
     f.close()
 
     #following loop runs constanly
@@ -47,7 +47,7 @@ async def mainFlightLogic():
             #start video recording if not already running
 
         else:
-            print("bla")
+            print("blu")
             #run continous picture taking task
 
         await asyncio.sleep(60) #refresh
