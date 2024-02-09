@@ -23,6 +23,7 @@ async def mainFlightLogic():
     mainTasks = []
     cameraTasks = []
     heartbeatObj = heartbeat.heartbeart()
+    ms5637Obj = ms5637.ms5637()
 
     bootLogic() #running boot logic
 
@@ -37,7 +38,7 @@ async def mainFlightLogic():
     #following loop runs constanly
     while True:
         #calculate rAltitude(risen altitude) =  (cAltitude(currentAltitude) - sAltitude(start Altitude))
-        cAltitude = ms5637.ms5637.read()
+        cAltitude = ms5637Obj.read()
         rAltitude = cAltitude - sAltitude
 
         #camera mode 

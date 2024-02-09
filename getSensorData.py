@@ -11,7 +11,8 @@ class DataScraper:
     async def collectData():
         global data
         b400 = bma400.bma400()
-        
+        m5637 = ms5637.ms5637()
+
         while True:
             #reading time
             try:
@@ -49,7 +50,7 @@ class DataScraper:
 
             #reading altitude
             try:
-                data.append(ms5637.ms5637.read())
+                data.append(m5637.read())
             except:
                 writeToLog("Ms5637 reading failed")
                 data.append("NaN")
