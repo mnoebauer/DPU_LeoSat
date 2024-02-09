@@ -8,13 +8,12 @@ class heartbeart:
     Driver class for the "Hearbeat" that sends a signal every 2 Minutes 
     to the Watchdog that the DPU is still alive
     """
-    t = GPIO
-    t.setmode(t.Board)
-    t.setup(17,t.OUT,initial = t.LOW)
 
     async def run(self):
+        GPIO.setmode(GPIO.Board)
+        GPIO.setup(17,GPIO.OUT,initial = GPIO.LOW)
         while True:
-            self.t.output(17,1)
+            GPIO.output(17,1)
             await asyncio.sleep(0.5)
-            self.t.output(17,0)
+            GPIO.output(17,0)
             await asyncio.sleep(120)
