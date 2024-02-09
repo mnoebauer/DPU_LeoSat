@@ -6,11 +6,12 @@ class RTC:
     """
     Driver for the DS3231 RTC Module to get the time
     """
-    def read():
-        i2c = board.I2C()
-        rtc = adafruit_ds3231(i2c)
+    def __init__(self) -> None:
+            self.i2c = board.I2C()
+            self.rtc = adafruit_ds3231(self.i2c)
 
-        r = rtc.datetime
+    def read(self):
+        r = self.rtc.datetime
         t = str(r.tm_hour) +":"+ str(r.tm_min)+":"+ str(r.tm_sec)
         return t
 
