@@ -1,4 +1,4 @@
-from PiicoDev_MS5637 import PiicoDev_MS5637
+from lib import PiicoDev_MS5637
 
 class ms5637():
     """
@@ -6,5 +6,5 @@ class ms5637():
     but only the altitude is used
     """
     def read():
-        sensor = PiicoDev_MS5637()
+        sensor = PiicoDev_MS5637.PiicoDev_MS5637()
         return sensor.read_altitude()
