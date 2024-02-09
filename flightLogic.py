@@ -62,6 +62,7 @@ def bootLogic():
 
     f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
     bootnumber = f.readline()
+    print("bootnumber:"+bootnumber)
     f.close()
 
     #0 is the initial value at the start, during the launch it should be the first boot
