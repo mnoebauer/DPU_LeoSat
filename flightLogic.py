@@ -9,6 +9,7 @@ import pandas as pd
 import csv
 
 def __main__():
+    print("hello")
     asyncio.run((mainFlightLogic()))
 
 async def mainFlightLogic():
@@ -18,6 +19,7 @@ async def mainFlightLogic():
     It constantly runs the heartbeat to show the watchdog that it is alive
     It constantly gets the sensor data and saves it
     """
+    print("what")
 
     highPriorityTasks = []
     mainTasks = []
