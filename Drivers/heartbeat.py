@@ -7,11 +7,11 @@ class heartbeart:
     to the Watchdog that the DPU is still alive
     """
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(11,GPIO.OUT)
+    GPIO.setup(17,GPIO.OUT)
     async def run(self):
 
         while True:
-            GPIO.output(11,1)
+            GPIO.output(17,1)
             await asyncio.sleep(0.5)
-            GPIO.output(11,0)
+            GPIO.output(17,0)
             await asyncio.sleep(120)
