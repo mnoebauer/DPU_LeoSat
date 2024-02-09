@@ -31,7 +31,7 @@ async def mainFlightLogic():
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
-    startAltitude = f.readline()
+    startAltitude = f.read()
     print("startaltitude:"+ startAltitude)
     sAltitude = int(startAltitude)
     f.close()
