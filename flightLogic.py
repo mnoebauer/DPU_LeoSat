@@ -71,7 +71,7 @@ def bootLogic():
     
     #old bootnumber +1 because there was one
     f = open('data/bootcycles.txt','w')
-    newBootnumber = bootnumber + 1
+    newBootnumber = int(bootnumber) + 1
     f.write(str(newBootnumber))
     f.close()
 """
