@@ -60,7 +60,8 @@ def bootLogic():
     and the time set to 00:00:00, also it records how many times 
     the DPU got booted up
     """
-
+    ms5637Obj = ms5637.ms5637()
+    
     f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
     bootnumber = f.readline()
     print("bootnumber:"+bootnumber)
@@ -68,8 +69,9 @@ def bootLogic():
 
     #0 is the initial value at the start, during the launch it should be the first boot
     if bootnumber == 0:
-        rtc.RTC.set() #on first boot set time to 00:00:00
-        altitude = ms5637.ms5637.read() #reading altitude on first boot to get reference
+        print("In?")
+        #rtc.RTC.set() #on first boot set time to 00:00:00
+        altitude = ms5637Obj.read() #reading altitude on first boot to get reference
         f = open('data/startAltitude.txt','w')
         f.write(altitude)
         f.close()
