@@ -1,22 +1,27 @@
 import board
+import csv
 import asyncio
 import RPi.GPIO as GPIO
+import wiringpi
 
 class Transmission:
     """
     Class for transmitting the data to the communication pcb
     """
-    def send():
+    async def send():
         """
         send function
         """
-        activateCom()
+        await asyncio.sleep(10)
+        while True:
+            activateCom()
 
-        if(waitForResponse() == True):
-            #response is there, ready to transmit data
-            print("True")
-        else:
-            print("No respones, not transmitting")
+            if waitForResponse():
+                transmit()
+            else:
+                print("No respones, not transmitting")
+            
+            await asyncio.sleep(5)
 
 
 async def activateCom():
@@ -41,4 +46,17 @@ async def waitForResponse():
         print("Edge detected on channel")
     return r
     
-        
+async def transmit():
+    f = open('data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+    oldRow = f.read() #
+    f.close()
+    
+    numOfRow = oldRow + 1
+
+    with open("data/data.csv") as fd:
+        reader = csv.reader(fd)
+        rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
+    
+    wiringpi.wiringPiSetup()
+    serial = wiringpi.serialOpen('/dev/ttyAMA0',9600)
+    wiringpi.serialPuts(serial,rowToSend)
