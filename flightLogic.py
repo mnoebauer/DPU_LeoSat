@@ -68,13 +68,13 @@ def bootLogic():
         f = open('data/startAltitude.txt','w')
         f.write(altitude)
         f.close()
-    
+"""  
     #old bootnumber +1 because there was one
     f = open('data/bootcycles.txt','w')
     newBootnumber = int(bootnumber) + 1
     f.write(str(newBootnumber))
     f.close()
-"""
+
     #wrtiting csv headers if not done yet
     df = pd.read_csv("data/data.csv")
     if df.empty:
