@@ -76,9 +76,9 @@ def bootLogic():
     if bootnumber == 0:
         print("In?")
         #rtc.RTC.set() #on first boot set time to 00:00:00
-       
-
-    """  
+        
+        """
+"""  
     #old bootnumber +1 because there was one
     f = open('data/bootcycles.txt','w')
     newBootnumber = int(bootnumber) + 1
