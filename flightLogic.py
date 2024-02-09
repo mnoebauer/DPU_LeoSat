@@ -5,6 +5,8 @@ import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import pandas as pd
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
 import csv
 
 def __main__():
