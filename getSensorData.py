@@ -40,7 +40,7 @@ class DataScraper:
 
             #reading x,y,z acceleration
             try:
-                accx,accy,accz = bma400.bma400.read()
+                accx,accy,accz = b400.read()
                 data.append(accx)
                 data.append(accy)
                 data.append(accz)
