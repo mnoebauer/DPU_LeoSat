@@ -4,8 +4,6 @@ sys.path
 import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
-#import warnings
-#warnings.simplefilter(action='ignore', category=FutureWarning)
 #import pandas as pd
 import csv
 
@@ -32,7 +30,6 @@ async def mainFlightLogic():
 
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
     startAltitude = f.read()
-    print("startaltitude:"+ startAltitude)
     sAltitude = float(startAltitude)
     f.close()
 
@@ -64,7 +61,6 @@ def bootLogic():
 
     f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
     bootnumber = f.readline()
-    print("bootnumber:"+bootnumber)
     f.close()
 
     #0 is the initial value at the start, during the launch it should be the first boot

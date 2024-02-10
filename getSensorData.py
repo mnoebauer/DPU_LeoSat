@@ -10,13 +10,14 @@ class DataScraper:
     """
     async def collectData():
         global data
+        rtcmod = rtc.RTC()
         b400 = bma400.bma400()
         m5637 = ms5637.ms5637()
 
         while True:
             #reading time
             try:
-                data.append(rtc.RTC.read())
+                data.append(rtcmod.read())
             except:
                 writeToLog("RTC reading failed")
                 data.append("NaN")

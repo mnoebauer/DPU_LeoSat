@@ -8,6 +8,7 @@ class RTC:
     """
     i2c = board.I2C()
     rtc = adafruit_ds3231.DS3231(i2c)
+    rtc.datetime = time.struct_time((2024,0,0,0,0,0,0,1,-1))
 
     def read(self):
         r = self.rtc.datetime
