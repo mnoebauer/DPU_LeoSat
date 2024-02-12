@@ -10,21 +10,26 @@ class DataScraper:
     """
     async def collectData():
         global data
-        rtcmod = rtc.RTC()
-        b400 = bma400.bma400()
-        m5637 = ms5637.ms5637()
+
+        rtcObj = rtc.RTC()
+        bma400Obj = bma400.bma400()
+        m5637Obj = ms5637.ms5637()
+        bme688Obj = bme688.BME680()
+        gpsObj = gps.GPS()
+        hte501Obj = HTE501.HTE()
+        ee895Obj = ee895.ee895()
 
         while True:
             #reading time
             try:
-                data.append(rtcmod.read())
+                data.append(rtcObj.read())
             except:
                 writeToLog("RTC reading failed")
                 data.append("NaN")
 
             #reading gas resistance
             try:
-                data.append(bme688.BME680.read())
+                data.append(bme688Obj.read())
             except:
                 writeToLog("BME688 reading failed")
                 data.append("NaN")
@@ -41,7 +46,7 @@ class DataScraper:
 
             #reading x,y,z acceleration
             try:
-                accx,accy,accz = b400.read()
+                accx,accy,accz = bma400Obj.read()
                 data.append(accx)
                 data.append(accy)
                 data.append(accz)
@@ -51,13 +56,13 @@ class DataScraper:
 
             #reading altitude
             try:
-                data.append(m5637.read())
+                data.append(m5637Obj.read())
             except:
                 writeToLog("Ms5637 reading failed")
                 data.append("NaN")
 
             try:
-                data.append(gps.GPS.read())
+                data.append(gpsObj.read())
             except:
                 writeToLog("GPS reading failed")
                 data.append("NaN")
@@ -65,7 +70,7 @@ class DataScraper:
                 data.append("NaN")
             
             try:
-                data.append(ee895.ee895.read())
+                data.append(ee895Obj.read())
             except:
                 writeToLog("EE895 reading failed")
                 data.append("NaN")

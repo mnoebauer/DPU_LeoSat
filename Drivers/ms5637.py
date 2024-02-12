@@ -7,5 +7,6 @@ class ms5637():
     """
 
     sensor = PiicoDev_MS5637.PiicoDev_MS5637()
+    
     def read(self):
         return self.sensor.read_altitude()

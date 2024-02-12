@@ -8,8 +8,8 @@ class heartbeart:
     """
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(17,GPIO.OUT)
+    
     async def run(self):
-
         while True:
             GPIO.output(17,1)
             await asyncio.sleep(0.5)
