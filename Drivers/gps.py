@@ -10,5 +10,7 @@ class GPS:
                 lat = self.qwiicGPS.gnss_messages['Latitude']
                 long = self.qwiicGPS.gnss_messages['Longitude']
                 alt = self.qwiicGPS.gnss_messages['Altitude']
+        else:
+             print("not true")
 
         return lat, long, alt
