@@ -14,4 +14,4 @@ while True:
         long = "NaN"
         alt = "NaN"
             
-    print(str(lat,long,alt))
+    print(str(lat)+";"+(str(long)+";"+(str(alt)+";")))
