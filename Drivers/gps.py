@@ -1,9 +1,9 @@
 import qwiic_titan_gps
 
 class GPS:
-    def __init__(self) -> None:
-        qwiicGPS = qwiic_titan_gps.QwiicTitanGps()
-        qwiicGPS.begin()
+    qwiicGPS = qwiic_titan_gps.QwiicTitanGps()
+    
+    print("gps is conneceted?"+qwiicGPS.begin())
 
     def read(self):
         if self.qwiicGPS.get_nmea_data() is True:
