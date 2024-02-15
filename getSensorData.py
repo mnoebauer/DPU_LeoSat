@@ -39,7 +39,8 @@ class DataScraper:
                 temp,hum = hte501Obj.read()
                 data.append(temp)
                 data.append(hum)
-            except:
+            except Exception as e:
+                print(e)
                 writeToLog("HTE501 reading failed")
                 data.append("NaN")
                 data.append("NaN")
