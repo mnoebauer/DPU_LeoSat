@@ -36,7 +36,7 @@ class DataScraper:
             
             #reading temperature and humidity
             try:
-                temp,hum = HTE501.HTE.read()
+                temp,hum = hte501Obj.read()
                 data.append(temp)
                 data.append(hum)
             except:
