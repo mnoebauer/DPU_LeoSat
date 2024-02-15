@@ -23,7 +23,7 @@ async def mainFlightLogic():
     ms5637Obj = ms5637.ms5637()
 
     task = asyncio.create_task(bootLogic()) #running boot logic
-    await asyncio.wait_for(task)
+    await asyncio.wait_for(task,5)
 
     print("what")
     highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
