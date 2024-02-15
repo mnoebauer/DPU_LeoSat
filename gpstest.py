@@ -13,7 +13,7 @@ def run_example():
         return
 
     qwiicGPS.begin()
-
+    sleep(300)
     while True:
         if qwiicGPS.get_nmea_data() is True:
             for k,v in qwiicGPS.gnss_messages.items():
