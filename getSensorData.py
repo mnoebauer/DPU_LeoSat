@@ -15,7 +15,7 @@ class DataScraper:
         bma400Obj = bma400.bma400()
         m5637Obj = ms5637.ms5637()
         bme688Obj = bme688.BME680()
-        #gpsObj = gps.GPS()
+        gpsObj = gps.GPS()
         hte501Obj = HTE501.HTE()
         ee895Obj = ee895.ee895()
 
@@ -61,7 +61,7 @@ class DataScraper:
             except:
                 writeToLog("Ms5637 reading failed")
                 data.append("NaN")
-            """
+            
             try:
                 data.append(gpsObj.read())
             except:
@@ -69,7 +69,7 @@ class DataScraper:
                 data.append("NaN")
                 data.append("NaN")
                 data.append("NaN")
-            """
+            
             try:
                 data.append(ee895Obj.read())
             except:
