@@ -51,7 +51,7 @@ async def mainFlightLogic():
 
         await asyncio.sleep(60) #refresh
 
-async def bootLogic(l):
+async def bootLogic():
     """
     Boot Logic is called first on Boot,
     there is will be a reference for the altitude set
