@@ -12,5 +12,8 @@ class GPS:
             alt = self.qwiicGPS.gnss_messages['Altitude']
         else:
             print("not true")
-
+            lat = "NaN"
+            logn = "NaN"
+            alt = "NaN"
+        
         return lat, long, alt
