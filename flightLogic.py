@@ -58,37 +58,30 @@ def bootLogic():
     the DPU got booted up
     """
     ms5637Obj = ms5637.ms5637()
+    rtcObj = rtc.RTC()
 
     f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
     bootnumber = f.readline()
     f.close()
 
-    #0 is the initial value at the start, during the launch it should be the first boot
-    altitude = ms5637Obj.read() #reading altitude on first boot to get reference
-    f = open('data/startaltitude.txt','w')
-    f.write(str(altitude))
-    f.close()
-    """
     if bootnumber == 0:
-        print("In?")
-        #rtc.RTC.set() #on first boot set time to 00:00:00
-        
-        """
-"""  
+        #0 is the initial value at the start, during the launch it should be the first boot
+        altitude = ms5637Obj.read() #reading altitude on first boot to get reference
+        f = open('data/startaltitude.txt','w')
+        f.write(str(altitude))
+        f.close()
+        rtcObj.set()
+        with open('data/data.csv','w') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
+                              "Altitude", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
+
+
     #old bootnumber +1 because there was one
     f = open('data/bootcycles.txt','w')
     newBootnumber = int(bootnumber) + 1
     f.write(str(newBootnumber))
     f.close()
-
-    #wrtiting csv headers if not done yet
-    df = pd.read_csv("data/data.csv")
-    if df.empty:
-        with open('data/data.csv','w') as file:
-            writer = csv.writer(file)
-            writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
-                              "Altitude", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
-"""
 
 def main():
     asyncio.run((mainFlightLogic()))
