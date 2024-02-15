@@ -25,7 +25,6 @@ async def mainFlightLogic():
     task = asyncio.create_task(bootLogic()) #running boot logic
     await asyncio.wait_for(task,5)
 
-    print("what")
     highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
@@ -64,12 +63,10 @@ async def bootLogic():
     f = open('data/bootcycles.txt','r') #opening the bootcycles file in read mode
     bootnumber = f.readline()
     f.close()
-    print("bootnumber:" + str(bootnumber))
 
     if int(bootnumber) == 0:
         #0 is the initial value at the start, during the launch it should be the first boot
         altitude = ms5637Obj.read() #reading altitude on first boot to get reference
-        print("Altitude:"+ str(altitude))
         f = open('data/startaltitude.txt','w')
         f.write(str(altitude))
         f.close()
