@@ -22,7 +22,8 @@ async def mainFlightLogic():
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
 
-    bootLogic() #running boot logic
+    t = asyncio.create_task(bootLogic()) #running boot logic
+    await t.done()
 
     highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
@@ -49,7 +50,7 @@ async def mainFlightLogic():
 
         await asyncio.sleep(60) #refresh
 
-def bootLogic():
+async def bootLogic():
     """
     Boot Logic is called first on Boot,
     there is will be a reference for the altitude set
@@ -59,9 +60,10 @@ def bootLogic():
     ms5637Obj = ms5637.ms5637()
     rtcObj = rtc.RTC()
 
-    f = open('data/bootcycles.txt','r') #opening the startAltitude file in read mode
+    f = open('data/bootcycles.txt','r') #opening the bootcycles file in read mode
     bootnumber = f.readline()
     f.close()
+    print("bootnumber:" + str(bootnumber))
 
     if bootnumber == 0:
         #0 is the initial value at the start, during the launch it should be the first boot
@@ -70,6 +72,7 @@ def bootLogic():
         f.write(str(altitude))
         f.close()
         rtcObj.set()
+
         with open('data/data.csv','w') as file:
             writer = csv.writer(file)
             writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
