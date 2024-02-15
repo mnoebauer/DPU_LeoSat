@@ -8,4 +8,4 @@ class HTE():
     hte = hte501_i2c_library.HTE501(0x40)
     
     def read(self):
-        return self.hte.get_single_shot_temp_hum
+        return self.hte.get_single_shot_temp_hum()
