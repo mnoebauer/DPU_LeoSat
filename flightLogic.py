@@ -23,7 +23,7 @@ async def mainFlightLogic():
     ms5637Obj = ms5637.ms5637()
 
     task = asyncio.create_task(bootLogic()) #running boot logic
-    await asyncio.sleep(5)
+    await asyncio.wait_for(task)
 
     print("what")
     highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
@@ -51,7 +51,7 @@ async def mainFlightLogic():
 
         await asyncio.sleep(60) #refresh
 
-async def bootLogic():
+async def bootLogic(l):
     """
     Boot Logic is called first on Boot,
     there is will be a reference for the altitude set
