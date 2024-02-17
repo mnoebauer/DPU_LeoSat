@@ -64,10 +64,10 @@ class DataScraper:
                 data.append("NaN")
             
             try:
-                tup = gpsObj.read()
-                data.append(tup[0])
-                data.append(tup[1]) 
-                data.append(tup[2]) 
+                gpstup = gpsObj.read()
+                data.append(gpstup[0])
+                data.append(gpstup[1]) 
+                data.append(gpstup[2]) 
             except:
                 writeToLog("GPS reading failed")
                 data.append("NaN")
