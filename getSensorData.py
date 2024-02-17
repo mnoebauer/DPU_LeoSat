@@ -39,8 +39,7 @@ class DataScraper:
                 temp,hum = hte501Obj.read()
                 data.append(temp)
                 data.append(hum)
-            except Exception as e:
-                print(e)
+            except:
                 writeToLog("HTE501 reading failed")
                 data.append("NaN")
                 data.append("NaN")
@@ -54,6 +53,8 @@ class DataScraper:
             except:
                 writeToLog("BMM400 reading failed")
                 data.append("NaN")
+                data.append("NaN")
+                data.append("NaN")
 
             #reading altitude
             try:
@@ -63,7 +64,10 @@ class DataScraper:
                 data.append("NaN")
             
             try:
-                data.append(gpsObj.read())
+                tup = gpsObj.read()
+                data.append(tup[0])
+                data.append(tup[1]) 
+                data.append(tup[2]) 
             except:
                 writeToLog("GPS reading failed")
                 data.append("NaN")

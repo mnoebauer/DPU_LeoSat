@@ -70,12 +70,12 @@ async def bootLogic():
         f = open('data/startaltitude.txt','w')
         f.write(str(altitude))
         f.close()
-        rtcObj.set()
+        rtcObj.set() #Setting the rtc to 00:00:00
 
         with open('data/data.csv','w') as file:
             writer = csv.writer(file)
-            writer.writerow(["Zeit", "Gas-Resistance", "Temperatur", "Luftfeuchtigkeit", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
-                              "Altitude", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
+            writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperatur_HTE501", "Humidity_HTE501", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
+                              "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
 
 
     #old bootnumber +1 because there was one
