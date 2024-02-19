@@ -39,6 +39,9 @@ class DataScraper:
             except:
                 writeToLog("BME688 reading failed")
                 data.append("NaN")
+                data.append("NaN")
+                data.append("NaN")
+                data.append("NaN")
             
             #reading temperature and humidity via HTE501 inside
             try:
@@ -79,6 +82,7 @@ class DataScraper:
                 writeToLog("Ms5637 reading failed")
                 data.append("NaN")
             
+            #reading gps data
             try:
                 gpstup = gpsObj.read()
                 data.append(gpstup[0])
@@ -90,8 +94,12 @@ class DataScraper:
                 data.append("NaN")
                 data.append("NaN")
             
+            #reading EE895 data
             try:
-                data.append(ee895Obj.read())
+                temp_ee,c02_ee,pres_ee = ee895Obj.read()
+                data.append(temp_ee)
+                data.append(c02_ee)
+                data.append(pres_ee)
             except:
                 writeToLog("EE895 reading failed")
                 data.append("NaN")
