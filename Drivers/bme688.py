@@ -10,14 +10,14 @@ class BME680:
     def read(self):
         if self.sensor.get_sensor_data():
             gas = self.sensor.data.gas_resistance
-            temp = self.sensor.temperature
-            hum = self.sensor.humidity
-            pres = self.sensor.pressure
+            temp = self.sensor.data.temperature
+            hum = self.sensor.data.humidity
+            pres = self.sensor.data.pressure
 
         else:
             gas = "NaN"
             temp = "NaN"
             hum = "NaN"
             pres = "NaN"
-            
+
         return gas,temp,hum,pres
