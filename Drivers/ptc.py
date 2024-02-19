@@ -1,4 +1,4 @@
-from lib import ads1110
+import ads1110
 from machine import I2C
 
 i2c = I2C(freq = 100000)
