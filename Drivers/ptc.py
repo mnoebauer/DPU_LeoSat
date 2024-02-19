@@ -1,7 +1,8 @@
-from smbus import SMBus
-import time
+import board
+import busio
 
-i2c = SMBus(1)
+
+i2c = busio.I2C(board.SCL, board.SDA)
 
 i2cadress = 0x48
 temp3 = bytearray(3)
