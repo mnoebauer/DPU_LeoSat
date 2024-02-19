@@ -24,3 +24,6 @@ class camclass():
         time.sleep(10) 
         picam2.stop_recording()
 
+camclassObj = camclass()
+
+camclassObj.takeVideo()

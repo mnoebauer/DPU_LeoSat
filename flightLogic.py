@@ -74,7 +74,7 @@ async def bootLogic():
 
         with open('data/data.csv','w') as file:
             writer = csv.writer(file)
-            writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperatur_HTE501", "Humidity_HTE501", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
+            writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperature_BME688", "Humidity_BME688", "Pressure_BME688", "Temperatur_HTE501", "Humidity_HTE501", "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
                               "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
 
 

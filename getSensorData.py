@@ -29,7 +29,12 @@ class DataScraper:
 
             #reading gas resistance
             try:
-                data.append(bme688Obj.read())
+                gas,temp_bme,hum_bme,pres_bme = bme688Obj.read()
+                data.append(gas)
+                data.append(temp_bme)
+                data.append(hum_bme)
+                data.append(pres_bme)
+
             except:
                 writeToLog("BME688 reading failed")
                 data.append("NaN")
