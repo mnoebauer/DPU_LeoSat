@@ -23,26 +23,26 @@
 import time
 
 
-_OS_MASK = const(0x80)
-_OS_SINGLE = const(0x80)  # Write: Set to start a single-conversion
-_OS_BUSY = const(0x80)    # Read: Bit=1 when conversion is in progress
-_OS_NOTBUSY = const(0x00) # Read: Bit=0 when device is not performing a conversion
+_OS_MASK = 0x80
+_OS_SINGLE = 0x80  # Write: Set to start a single-conversion
+_OS_BUSY = 0x80    # Read: Bit=1 when conversion is in progress
+_OS_NOTBUSY = 0x00 # Read: Bit=0 when device is not performing a conversion
 
-_PGA_MASK = const(0x03)
-_PGA_1 = const(0x00)  # +/-2.048V range = Gain 1 (default)
-_PGA_2 = const(0x01)  # +/-1.024V range = Gain 2
-_PGA_4 = const(0x02)  # +/-0.512V range = Gain 4
-_PGA_8 = const(0x03)  # +/-0.256V range = Gain 8
+_PGA_MASK = 0x03
+_PGA_1 = 0x00  # +/-2.048V range = Gain 1 (default)
+_PGA_2 = 0x01  # +/-1.024V range = Gain 2
+_PGA_4 = 0x02  # +/-0.512V range = Gain 4
+_PGA_8 = 0x03  # +/-0.256V range = Gain 8
 
-_MODE_MASK = const(0x010)
-_MODE_CONTIN = const(0x00)  # Continuous conversion mode (default)
-_MODE_SINGLE = const(0x10)  # Power-down single-shot mode
+_MODE_MASK = 0x010
+_MODE_CONTIN = 0x00  # Continuous conversion mode (default)
+_MODE_SINGLE = 0x10  # Power-down single-shot mode
 
-_DR_MASK = const(0x0C)    # 
-_DR_240SPS = const(0x00)  # 240 samples per second, 12 Bits
-_DR_60SPS = const(0x04)   # 60 samples per second, 14 Bits
-_DR_30SPS = const(0x08)   # 30 samples per second, 15 Bits
-_DR_15SPS = const(0x0C)   # 15 samples per second, 16 Bits (Default)
+_DR_MASK = 0x0C    # 
+_DR_240SPS = 0x00  # 240 samples per second, 12 Bits
+_DR_60SPS = 0x04   # 60 samples per second, 14 Bits
+_DR_30SPS = 0x08   # 30 samples per second, 15 Bits
+_DR_15SPS = 0x0C  # 15 samples per second, 16 Bits (Default)
 
 _GAINS = (
     _PGA_1, # 1x
