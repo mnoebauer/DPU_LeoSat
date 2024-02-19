@@ -40,7 +40,7 @@ class DataScraper:
                 writeToLog("BME688 reading failed")
                 data.append("NaN")
             
-            #reading temperature and humidity
+            #reading temperature and humidity via HTE501 inside
             try:
                 temp,hum = hte501InsideObj.read()
                 data.append(temp)
@@ -50,7 +50,7 @@ class DataScraper:
                 data.append("NaN")
                 data.append("NaN")
 
-            #reading temperature and humidity
+            #reading temperature and humidity via HTE501 outside
             try:
                 temp_o,hum_o = hte501OutsideObj.read()
                 data.append(temp_o)
