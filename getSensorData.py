@@ -16,7 +16,8 @@ class DataScraper:
         m5637Obj = ms5637.ms5637()
         bme688Obj = bme688.BME680()
         gpsObj = gps.GPS()
-        hte501Obj = HTE501.HTE()
+        hte501InsideObj = HTE501.HTE(0x40)
+        hte501OutsideObj = HTE501.HTE(0x20)
         ee895Obj = ee895.ee895()
 
         while True:
@@ -41,11 +42,21 @@ class DataScraper:
             
             #reading temperature and humidity
             try:
-                temp,hum = hte501Obj.read()
+                temp,hum = hte501InsideObj.read()
                 data.append(temp)
                 data.append(hum)
             except:
-                writeToLog("HTE501 reading failed")
+                writeToLog("HTE501 Inside reading failed")
+                data.append("NaN")
+                data.append("NaN")
+
+            #reading temperature and humidity
+            try:
+                temp_o,hum_o = hte501OutsideObj.read()
+                data.append(temp_o)
+                data.append(hum_o)
+            except:
+                writeToLog("HTE501 Outside reading failed")
                 data.append("NaN")
                 data.append("NaN")
 

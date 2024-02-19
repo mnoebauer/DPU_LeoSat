@@ -4,8 +4,9 @@ class HTE():
     """
     Driver for the HTE501 temperature, humidity and dewpoint sensor
     """
-
-    hte = hte501_i2c_library.HTE501(0x40)
+    def __init__(self,i2cadr):
+        self.i2cadr = self.i2cadr
+        hte = hte501_i2c_library.HTE501(self.i2cadr)
     
     def read(self):
         return self.hte.get_single_shot_temp_hum()
