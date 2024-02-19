@@ -16,8 +16,8 @@ class DataScraper:
         m5637Obj = ms5637.ms5637()
         bme688Obj = bme688.BME680()
         gpsObj = gps.GPS()
-        hte501InsideObj = HTE501.HTE(0x40)
-        hte501OutsideObj = HTE501.HTE(0x20)
+        hte501InsideObj = HTE501.HTE(0x40) #Object of hte501 class with the i2c adress for the inside sensor
+        hte501OutsideObj = HTE501.HTE(0x20) #Object of hte501 class with the i2c adress for the outside sensor
         ee895Obj = ee895.ee895()
 
         while True:
