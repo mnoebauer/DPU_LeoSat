@@ -7,13 +7,6 @@ numb = 1
  
 print ("Enter 1 for ON or 0 for OFF")
 while numb == 1:
- 
-	ledstate = 1
-
-	if ledstate == "1":
-		bus.write_byte(addr, 0x1) # switch it on
-		print("done")
-	elif ledstate == "0":
-		bus.write_byte(addr, 0x0) # switch it on
-	else:
-		numb = 0
+	print("in")
+	bus.write_byte(addr, 0x1) # switch it on
+	print("done")
