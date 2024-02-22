@@ -1,5 +1,5 @@
 from smbus2 import SMBus
+bus = SMBus(1)
 
-with SMBus(1) as bus:
-    b = bus.read_byte(0x80)
-    print(b)
+b = bus.read_byte(0x80)
+print(b)
