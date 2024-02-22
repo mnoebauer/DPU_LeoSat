@@ -21,7 +21,7 @@ async def mainFlightLogic():
     task = asyncio.create_task(bootLogic()) #running boot logic
     await asyncio.wait_for(task,5)
 
-    #mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
+    mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
     f = open('Desktop/DPU_LeoSat/data/startaltitude.txt','r') #open startAltitude file in read mode
