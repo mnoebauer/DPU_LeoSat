@@ -1,6 +1,6 @@
 from smbus import SMBus
  
-addr = 0x10 # bus address
+addr = 0x70 # bus address
 bus = SMBus(1) # indicates /dev/ic2-1
  
 numb = 1
