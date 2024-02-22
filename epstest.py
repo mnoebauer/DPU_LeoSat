@@ -12,5 +12,5 @@ print("done")
 sleep(5)
 
 while True:
-    b = bus.read_byte_data(addr,5)
+    b = bus.read_byte(addr)
     print(str(b))
