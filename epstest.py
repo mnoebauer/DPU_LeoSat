@@ -8,5 +8,5 @@ numb = 1
 print ("Enter 1 for ON or 0 for OFF")
 while numb == 1:
 	print("in")
-	bus.write_byte(addr, 0x1) # switch it on
+	bus.write_byte(addr, 1) # switch it on
 	print("done")
