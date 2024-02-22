@@ -24,7 +24,7 @@ async def mainFlightLogic():
     mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
-    f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
+    f = open('Desktop/DPU_LeoSat/data/startaltitude.txt','r') #open startAltitude file in read mode
     startAltitude = f.read()
     sAltitude = float(startAltitude)
     f.close()
@@ -56,20 +56,20 @@ async def bootLogic():
     ms5637Obj = ms5637.ms5637()
     rtcObj = rtc.RTC()
 
-    f = open('data/bootcycles.txt','r') #opening the bootcycles file in read mode
+    f = open('Desktop/DPU_LeoSat/data/bootcycles.txt','r') #opening the bootcycles file in read mode
     bootnumber = f.readline()
     f.close()
 
     #if it is the first boot, save the current altitude, reset the rtc and fill the headings of the csv
     if int(bootnumber) == 0:
         altitude = ms5637Obj.read() #reading altitude on first boot to get reference
-        f = open('data/startaltitude.txt','w')
+        f = open('Desktop/DPU_LeoSat/data/startaltitude.txt','w')
         f.write(str(altitude))
         f.close()
         rtcObj.set() #Setting the rtc to 00:00:00
 
         #Filling the first row of the csv file with the names of the data
-        with open('data/data.csv','w') as file:
+        with open('Desktop/DPU_LeoSat/data/data.csv','w') as file:
             writer = csv.writer(file)
             writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperature_BME688", "Humidity_BME688", "Pressure_BME688", "Temperatur_HTE501_Inside", "Humidity_HTE501_Inside",
                              "Temperatur_HTE501_Outside", "Humidity_HTE501_Outside",
@@ -77,7 +77,7 @@ async def bootLogic():
                               "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
 
     #old bootnumber +1
-    f = open('data/bootcycles.txt','w')
+    f = open('Desktop/DPU_LeoSat/data/bootcycles.txt','w')
     newBootnumber = int(bootnumber) + 1
     f.write(str(newBootnumber))
     f.close()
