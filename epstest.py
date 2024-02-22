@@ -1,4 +1,3 @@
-
 from smbus import SMBus
  
 addr = 0x08 # bus address
@@ -10,9 +9,10 @@ print ("Enter 1 for ON or 0 for OFF")
 while numb == 1:
  
 	ledstate = 1
- 
+
 	if ledstate == "1":
 		bus.write_byte(addr, 0x1) # switch it on
+		print("done")
 	elif ledstate == "0":
 		bus.write_byte(addr, 0x0) # switch it on
 	else:
