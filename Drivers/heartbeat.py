@@ -14,4 +14,4 @@ class heartbeart:
             GPIO.output(17,1)
             await asyncio.sleep(1)
             GPIO.output(17,0)
-            await asyncio.sleep(29)
+            await asyncio.sleep(19)
