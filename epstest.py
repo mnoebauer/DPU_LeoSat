@@ -1,12 +1,5 @@
-import smbus2 as SMBus
-from time import sleep
+from smbus2 import SMBus
 
-epsAdr = 0x80
-SMBus = SMBus(1)
-while True:
-
-    with SMBus as bus:
-        epsData = bus.read_i2c_block_data(epsAdr,0,5)
-    
-    print(str(epsData))
-    sleep(3)
+with SMBus(1) as bus:
+    b = bus.read_byte_data(80, 0)
+    print(b)
