@@ -1,12 +1,9 @@
 import sys
 sys.path
-
 import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import csv
-
-
 
 async def mainFlightLogic():
     """
@@ -16,7 +13,6 @@ async def mainFlightLogic():
     It constantly gets the sensor data and saves it
     """
 
-    highPriorityTasks = []
     mainTasks = []
     cameraTasks = []
     heartbeatObj = heartbeat.heartbeart()
@@ -25,7 +21,7 @@ async def mainFlightLogic():
     task = asyncio.create_task(bootLogic()) #running boot logic
     await asyncio.wait_for(task,5)
 
-    highPriorityTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
+    mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
 
     f = open('data/startaltitude.txt','r') #open startAltitude file in read mode
@@ -35,11 +31,11 @@ async def mainFlightLogic():
 
     #following loop runs constanly
     while True:
-        #calculate rAltitude(risen altitude) =  (cAltitude(currentAltitude) - sAltitude(start Altitude))
+        #calculate rAltitude(risen altitude) =  (cAltitude(currentAltitude) - sAltitude(startAltitude))
         cAltitude = ms5637Obj.read()
         rAltitude = cAltitude - sAltitude
 
-        #camera mode 
+        #Check risen Altitude for camera mode
         if rAltitude < 1000 or rAltitude > 34000:
             print("bla")
             #start video recording if not already running
