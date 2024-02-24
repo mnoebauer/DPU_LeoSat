@@ -36,7 +36,7 @@ class camclass():
         video_config = self.picam2.create_video_configuration() 
         self.picam2.configure(video_config) 
         
-        encoder = H264Encoder(bitrate=10000000) 
+        encoder = H264Encoder(bitrate=100000) 
         output = "vid" + str(i) +".h264"
         self.picam2.start_recording(encoder, output) 
         await asyncio.sleep(45)
