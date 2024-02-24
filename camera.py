@@ -2,20 +2,21 @@ from picamera2 import Picamera2
 from picamera2.encoders import H264Encoder
 import asyncio
 
-i = 0
+
 
 class camclass():
         
     picam2 = Picamera2()
-    
+    i = 0
+
     async def takePicture(self):
         config = self.picam2.create_still_configuration(main={"size": (1920, 1080)})
         self.picam2.configure(config)
         self.picam2.start()
 
         while True:
-            self.picam2.capture_file("picture"+ str(i) + ".jpg")
-            i += 1
+            self.picam2.capture_file("picture"+ str(self.i) + ".jpg")
+            self.i += 1
             await asyncio.sleep(10)
     
 
