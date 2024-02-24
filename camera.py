@@ -10,7 +10,7 @@ class camclass():
 
     async def takePicture(self):
 
-        f = open('DPU_LeoSat/data/picturenumber.txt','r') #opening the bootcycles file in read mode
+        f = open('~/DPU_LeoSat/data/picturenumber.txt','r') #opening the bootcycles file in read mode
         i = f.readline()
         f.close()
 
@@ -22,14 +22,14 @@ class camclass():
 
         i += 1
         
-        f = open('DPU_LeoSat/data/picturenumber.txt','w') 
+        f = open('~/DPU_LeoSat/data/picturenumber.txt','w') 
         i = f.write(i)
         f.close()
     
 
     async def takeVideo(self):
 
-        f = open('DPU_LeoSat/data/videonumber.txt','r') 
+        f = open('~/DPU_LeoSat/data/videonumber.txt','r') 
         i = f.readline()
         f.close()
 
@@ -43,7 +43,7 @@ class camclass():
         self.picam2.stop_recording()
 
         i += 1
-        f = open('DPU_LeoSat/data/videonumber.txt','w') 
+        f = open('~/DPU_LeoSat/data/videonumber.txt','w') 
         i = f.write(i)
         f.close()
 
