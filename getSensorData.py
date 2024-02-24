@@ -113,12 +113,12 @@ class DataScraper:
 def writeToLog(x):
        t = rtc.RTC()
        b = t.read()
-       f = open('Desktop/DPU_LeoSat/data/systemlog.txt','a') #opening the systemlog text file in append mode
+       f = open('/home/pi/DPU_LeoSat/data/systemlog.txt','a') #opening the systemlog text file in append mode
        f.write('\n') #creating a new line for every entry
        f.write(b) #documenting the time on every entry
        f.write(x) #writing the content into the file 
     
 def writeCsvData(d):
-    with open('Desktop/DPU_LeoSat/data/data.csv','a') as file:
+    with open('/home/pi/DPU_LeoSat/data/data.csv','a') as file:
         writer = csv.writer(file)
         writer.writerow(d)        
