@@ -50,4 +50,4 @@ class camclass():
 
 camclassObj = camclass()
 
-asyncio.run(camclassObj.takePicture()) 
+asyncio.run(camclassObj.takeVideo()) 
