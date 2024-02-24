@@ -14,7 +14,6 @@ async def mainFlightLogic():
     """
 
     mainTasks = []
-    cameraTasks = []
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
 
