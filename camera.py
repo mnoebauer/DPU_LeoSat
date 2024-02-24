@@ -20,10 +20,10 @@ class camclass():
 
         self.picam2.capture_file("picture"+ str(i) + ".jpg")
 
-        i += 1
-        
+        i = int(i) + 1
+                
         f = open('/home/pi/DPU_LeoSat/data/picturenumber.txt','w') 
-        i = f.write(i)
+        i = f.write(str(i))
         f.close()
     
 
@@ -42,9 +42,9 @@ class camclass():
         await asyncio.sleep(45)
         self.picam2.stop_recording()
 
-        i += 1
+        i  = int(i) + 1
         f = open('/home/pi/DPU_LeoSat/data/videonumber.txt','w') 
-        i = f.write(i)
+        i = f.write(str(i))
         f.close()
 
 
