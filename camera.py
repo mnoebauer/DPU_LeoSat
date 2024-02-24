@@ -33,6 +33,4 @@ class camclass():
 
 camclassObj = camclass()
 
-task = asyncio.create_task(camclassObj.takeVideo())  
-while True:
-    print("jjd")
+asyncio.run(camclassObj.takeVideo())  
