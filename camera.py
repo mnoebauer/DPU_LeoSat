@@ -16,7 +16,7 @@ class camclass():
         while True:
             self.picam2.capture_file("picture"+ str(i) + ".jpg")
             i += 1
-            asyncio.sleep(10)
+            await asyncio.sleep(10)
     
 
     async def takeVideo(self):
@@ -27,10 +27,10 @@ class camclass():
         encoder = H264Encoder(bitrate=10000000) 
         output = "test.h264" 
         self.picam2.start_recording(encoder, output) 
-        asyncio.sleep(10)
+        await asyncio.sleep(10)
         self.picam2.stop_recording()
 
 
 camclassObj = camclass()
 
-camclassObj.takeVideo()
+task = asyncio.create_task(camclassObj.takeVideo())  
