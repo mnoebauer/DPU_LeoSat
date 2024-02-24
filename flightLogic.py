@@ -4,6 +4,7 @@ import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import csv
+import camera
 
 async def mainFlightLogic():
     """
@@ -16,6 +17,7 @@ async def mainFlightLogic():
     mainTasks = []
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
+    cameraObj = camera.camclass()
 
     task = asyncio.create_task(bootLogic()) #running boot logic
     await asyncio.wait_for(task,5)
@@ -36,12 +38,12 @@ async def mainFlightLogic():
 
         #Check risen Altitude for camera mode
         if rAltitude < 1000 or rAltitude > 34000:
-            print("bla")
-            #start video recording if not already running
+            print("recording video")
+            asyncio.run(cameraObj.takeVideo())
 
         else:
-            print("blu")
-            #run continous picture taking task
+            print("takin picture")
+            asyncio.run(cameraObj.takePicture())
 
         await asyncio.sleep(60) #refresh
 

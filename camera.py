@@ -46,8 +46,3 @@ class camclass():
         f = open('/home/pi/DPU_LeoSat/data/videonumber.txt','w') 
         i = f.write(str(i))
         f.close()
-
-
-camclassObj = camclass()
-
-asyncio.run(camclassObj.takeVideo()) 
