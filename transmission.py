@@ -16,7 +16,9 @@ class Transmission:
         while True:
             activateCom()
 
-            if waitForResponse():
+            r = waitForResponse()
+            
+            if r:
                 transmit()
             else:
                 print("No respones, not transmitting")
