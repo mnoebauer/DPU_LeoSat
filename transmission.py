@@ -65,7 +65,7 @@ async def transmit():
     
     numOfRow = oldRow + 1
 
-    with open("data/data.csv") as fd:
+    with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
     try:
@@ -84,6 +84,6 @@ async def transmit():
     except:
         print("com failed")
 
-    f = open('data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
+    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
     f.write(numOfRow) #write the number of the row that got sent to the text file
     f.close()
