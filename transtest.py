@@ -11,7 +11,7 @@ from time import sleep
 while True:
     ser = serial.Serial ("/dev/ttyAMA0")    #Open named port 
     ser.baudrate = 115200                     #Set baud rate to 9600
-    data = [74 65 73 74  ]                 #Read ten characters from serial port to data
+    data = 74                 #Read ten characters from serial port to data
     ser.write(data)                         #Send back the received data
     ser.close()        
     sleep(1)
