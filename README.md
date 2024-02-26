@@ -16,7 +16,7 @@ First setup Auto-Login into the console in the raspi-config option.
 Then add the following line at the bottom of the .bashrc file:
 
 ```
-python pi/home/DPU_LeoSat/flightLogic.py
+python home/pi/DPU_LeoSat/flightLogic.py
 ```
 
 Now the file is run at the boot of the RPI.

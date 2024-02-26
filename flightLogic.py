@@ -42,7 +42,7 @@ async def mainFlightLogic():
             asyncio.run(cameraObj.takeVideo())
 
         else:
-            print("takin picture")
+            print("taking picture")
             asyncio.run(cameraObj.takePicture())
 
         await asyncio.sleep(60) #refresh
@@ -72,10 +72,12 @@ async def bootLogic():
         #Filling the first row of the csv file with the names of the data
         with open('/home/pi/DPU_LeoSat/data/data.csv','w') as file:
             writer = csv.writer(file)
-            writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperature_BME688", "Humidity_BME688", "Pressure_BME688", "Temperatur_HTE501_Inside", "Humidity_HTE501_Inside",
-                             "Temperatur_HTE501_Outside", "Humidity_HTE501_Outside",
-                              "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
-                              "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS", "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
+            writer.writerow(["Zeit", "Gas-Resistance_BME688", "Temperature_BME688", "Humidity_BME688", "Pressure_BME688",
+                            "Temperatur_HTE501_Inside", "Humidity_HTE501_Inside",
+                            "Temperatur_HTE501_Outside", "Humidity_HTE501_Outside",
+                            "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
+                            "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS",
+                            "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
 
     #old bootnumber +1
     f = open('/home/pi/DPU_LeoSat/data/bootcycles.txt','w')
