@@ -20,4 +20,4 @@ ser = serial.Serial(
 
 while 1:
         x=ser.readline()
-        print x
+        print (x)
