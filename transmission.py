@@ -2,7 +2,7 @@ import board
 import csv
 import asyncio
 import RPi.GPIO as GPIO
-import wiringpi
+import serial
 
 class Transmission:
     """
@@ -69,9 +69,18 @@ async def transmit():
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
     try:
-        wiringpi.wiringPiSetup()
-        serial = wiringpi.serialOpen('/dev/ttyAMA0',115200) #115200 Baudrate
-        wiringpi.serialPuts(serial,rowToSend) #sends the selected row to com pcb
+        ser = serial.Serial(
+            port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+            baudrate = 9600,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            bytesize=serial.EIGHTBITS, 
+            timeout=1
+        )
+
+        b = bytes(rowToSend, 'utf-8')
+        ser.write(b)
+        ser.close()
     except:
         print("com failed")
 
