@@ -67,12 +67,10 @@ class Transmission:
         for i in range(5): 
             if i == 0:
                 ser.write(b[i:199])
-                print(b[i:199])
-                sleep(1)
+                sleep(2)
             else:
                 ser.write(b[199*i+1:2*199*i]) 
-                print(b[199*i+1:2*199*i])
-                sleep(1)
+                sleep(2)
             i += 1
 
         ser.write(b)#send bytes
