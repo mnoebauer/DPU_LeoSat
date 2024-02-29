@@ -45,7 +45,7 @@ class Transmission:
         print(type(rowToSend))
     	'''
 
-        with open("home/pi/DPU_LeoSat/data/image0.png", "rb") as image:
+        with open("home/pi/DPU_LeoSat/data/image0.jpg", "rb") as image:
             f = image.read()
             b = bytearray(f)
             
