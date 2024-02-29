@@ -53,8 +53,8 @@ class Transmission:
                 timeout=1
             )
 
-        
-        ser.write("Hallo")
+        b = bytes("Hallo")
+        ser.write(b)
 
         ser.close()
         ##except:
