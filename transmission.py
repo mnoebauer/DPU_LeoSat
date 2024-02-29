@@ -41,7 +41,7 @@ class Transmission:
         with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
             reader = csv.reader(fd)
             rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
-        print(rowToSend)
+        print(type(rowToSend))
         #try:
         ser = serial.Serial(
                 port='/dev/ttyAMA0',
@@ -52,7 +52,7 @@ class Transmission:
                 timeout=1
             )
         #b = bytes(rowToSend, 'utf-8')
-        ser.write(bytearray(rowToSend))
+        ser.write(rowToSend)
 
         ser.close()
         ##except:
