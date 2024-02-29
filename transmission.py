@@ -52,8 +52,8 @@ class Transmission:
                 bytesize=serial.EIGHTBITS, 
                 timeout=1
             )
-        b = pickle.dumps(rowToSend)
-        print(b)
+
+        
         ser.write("Hallo")
 
         ser.close()
