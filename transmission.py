@@ -52,7 +52,7 @@ class Transmission:
                 timeout=1
             )
         #b = bytes(rowToSend, 'utf-8')
-        ser.write(rowToSend)
+        ser.write(bytearray(rowToSend))
 
         ser.close()
         ##except:
