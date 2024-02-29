@@ -32,7 +32,7 @@ class Transmission:
         At last the index of the row gets wirtten to the file again.
         """
 
-        f = open('/home/pi/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+        f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
         oldRow = f.read() #
         f.close()
         
