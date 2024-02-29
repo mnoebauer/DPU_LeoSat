@@ -64,12 +64,12 @@ class Transmission:
         #c = ",".join(str(element)for element in rowToSend) #converting list to string
         #b = bytes(c,'UTF-8') #converting list to bytes
         i = 0
-        for i in range(5): 
+        for i in range(9): 
             if i == 0:
-                ser.write(b[i:199])
+                ser.write(b[i:99])
                 sleep(2)
             else:
-                ser.write(b[199*i+1:2*199*i]) 
+                ser.write(b[99*i+1:2*99*i]) 
                 sleep(2)
             i += 1
 
