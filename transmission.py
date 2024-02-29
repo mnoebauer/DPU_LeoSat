@@ -32,17 +32,18 @@ class Transmission:
         increments that und gets the new row. Then establishes the UART connection an sends the data.
         At last the index of the row gets wirtten to the file again.
         """
-        '''
+        
         f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
         oldRow = f.read() #
-        f.close()'''
+        f.close()
         
-        #numOfRow = int(oldRow) + 1
+        numOfRow = int(oldRow) + 1
 
-        '''with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
+        with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
             reader = csv.reader(fd)
             rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
-        print(type(rowToSend))'''
+        print(type(rowToSend))
+
         #try:
         ser = serial.Serial(
                 port='/dev/ttyAMA0',
@@ -51,9 +52,10 @@ class Transmission:
                 stopbits=serial.STOPBITS_ONE,
                 bytesize=serial.EIGHTBITS, 
                 timeout=1
-            )
+            ) 
+        b = ",".join(str(element)for element in rowToSend)
 
-        b = bytes("Hallo",'UTF-8')
+        #b = bytes("Hallo",'UTF-8')
         ser.write(b)
 
         ser.close()
