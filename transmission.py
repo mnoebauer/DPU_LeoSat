@@ -53,7 +53,7 @@ class Transmission:
                 timeout=1
             )
 
-        b = bytes("Hallo")
+        b = bytes("Hallo",'UTF-8')
         ser.write(b)
 
         ser.close()
