@@ -4,6 +4,7 @@ import asyncio
 import RPi.GPIO as GPIO
 import serial
 import pickle
+from time import sleep
 
 class Transmission:
     """
@@ -49,6 +50,7 @@ class Transmission:
             f = image.read()
             b = bytearray(f)
 
+        
         #try:
         ser = serial.Serial(
                 port='/dev/ttyAMA0',
@@ -61,6 +63,16 @@ class Transmission:
         
         #c = ",".join(str(element)for element in rowToSend) #converting list to string
         #b = bytes(c,'UTF-8') #converting list to bytes
+        i = 0
+        for i in range(5): 
+            if i == 0:
+                ser.write(b[i:199])
+                sleep(1)
+            else:
+                ser.write(b[199*i+1:2*199*i]) 
+                sleep(1)
+            i += 1
+
         ser.write(b)#send bytes
 
         ser.close()
