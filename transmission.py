@@ -45,10 +45,10 @@ class Transmission:
         print(type(rowToSend))
     	'''
 
-        with open("/home/pi/DPU_LeoSat/data/picture0.jpg", "rb") as image:
+        with open("/home/pi/DPU_LeoSat/data/images.jpg", "rb") as image:
             f = image.read()
             b = bytearray(f)
-            
+
         #try:
         ser = serial.Serial(
                 port='/dev/ttyAMA0',
