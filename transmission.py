@@ -54,7 +54,7 @@ class Transmission:
             )
         b = pickle.dumps(rowToSend)
         print(b)
-        ser.write(b)
+        ser.write("Hallo")
 
         ser.close()
         ##except:
