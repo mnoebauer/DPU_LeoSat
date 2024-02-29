@@ -3,6 +3,7 @@ import csv
 import asyncio
 import RPi.GPIO as GPIO
 import serial
+import pickle
 
 class Transmission:
     """
@@ -52,7 +53,7 @@ class Transmission:
                 timeout=1
             )
         #b = bytes(rowToSend, 'utf-8')
-        ser.write(bytes(rowToSend))
+        ser.write(pickle.dumps(rowToSend))
 
         ser.close()
         ##except:
