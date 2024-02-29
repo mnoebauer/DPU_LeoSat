@@ -38,12 +38,17 @@ class Transmission:
         f.close()
         
         numOfRow = int(oldRow) + 1
-
+        '''
         with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
             reader = csv.reader(fd)
             rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
         print(type(rowToSend))
+    	'''
 
+        with open("home/pi/DPU_LeoSat/data/image0.png", "rb") as image:
+            f = image.read()
+            b = bytearray(f)
+            
         #try:
         ser = serial.Serial(
                 port='/dev/ttyAMA0',
@@ -54,8 +59,8 @@ class Transmission:
                 timeout=1
             ) 
         
-        c = ",".join(str(element)for element in rowToSend) #converting list to string
-        b = bytes(c,'UTF-8') #converting list to bytes
+        #c = ",".join(str(element)for element in rowToSend) #converting list to string
+        #b = bytes(c,'UTF-8') #converting list to bytes
         ser.write(b)#send bytes
 
         ser.close()
