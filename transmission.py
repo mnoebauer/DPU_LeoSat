@@ -52,8 +52,9 @@ class Transmission:
                 bytesize=serial.EIGHTBITS, 
                 timeout=1
             )
-        #b = bytes(rowToSend, 'utf-8')
-        ser.write(pickle.dumps(rowToSend))
+        b = pickle.dumps(rowToSend)
+        print(b)
+        ser.write(b)
 
         ser.close()
         ##except:
