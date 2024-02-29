@@ -25,7 +25,7 @@ class Transmission:
             
             await asyncio.sleep(5)
 
-    async def transmit():
+    def transmit():
         """
         Function that gets the number of the row of the csv file that got sent last time
         increments that und gets the new row. Then establishes the UART connection an sends the data.
