@@ -11,7 +11,7 @@ ser = serial.Serial(
 )
 counter=0
 
-mystring = "blabla"
+mystring = "laurin der hu"
 b = bytes(mystring, 'utf-8')
 
 while 1:
