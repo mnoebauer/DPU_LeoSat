@@ -51,8 +51,8 @@ class Transmission:
                 bytesize=serial.EIGHTBITS, 
                 timeout=1
             )
-        b = bytes(rowToSend, 'utf-8')
-        ser.write(b)
+        #b = bytes(rowToSend, 'utf-8')
+        ser.write(rowToSend)
 
         ser.close()
         ##except:
