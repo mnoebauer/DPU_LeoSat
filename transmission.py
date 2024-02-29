@@ -53,10 +53,10 @@ class Transmission:
                 bytesize=serial.EIGHTBITS, 
                 timeout=1
             ) 
-        c = ",".join(str(element)for element in rowToSend)
-
-        b = bytes(c,'UTF-8')
-        ser.write(b)
+        
+        c = ",".join(str(element)for element in rowToSend) #converting list to string
+        b = bytes(c,'UTF-8') #converting list to bytes
+        ser.write(b)#send bytes
 
         ser.close()
         ##except:
