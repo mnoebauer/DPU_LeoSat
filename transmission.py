@@ -25,6 +25,41 @@ class Transmission:
             
             await asyncio.sleep(5)
 
+    async def transmit():
+        """
+        Function that gets the number of the row of the csv file that got sent last time
+        increments that und gets the new row. Then establishes the UART connection an sends the data.
+        At last the index of the row gets wirtten to the file again.
+        """
+
+        f = open('/home/pi/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+        oldRow = f.read() #
+        f.close()
+        
+        numOfRow = oldRow + 1
+
+        with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
+            reader = csv.reader(fd)
+            rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
+            print(rowToSend)
+        try:
+            ser = serial.Serial(
+                port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+                baudrate = 9600,
+                parity=serial.PARITY_NONE,
+                stopbits=serial.STOPBITS_ONE,
+                bytesize=serial.EIGHTBITS, 
+                timeout=1
+            )
+            b = bytes(rowToSend, 'utf-8')
+            ser.write(b)
+            ser.close()
+        except:
+            print("com failed")
+
+        f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
+        f.write(numOfRow) #write the number of the row that got sent to the text file
+        f.close()
 
 async def activateCom():
     """
@@ -52,38 +87,3 @@ async def waitForResponse():
         r = True
     return r
     
-async def transmit():
-    """
-    Function that gets the number of the row of the csv file that got sent last time
-    increments that und gets the new row. Then establishes the UART connection an sends the data.
-    At last the index of the row gets wirtten to the file again.
-    """
-
-    f = open('data/lastDataSent.txt','r') #opening the systemlog text file in append mode
-    oldRow = f.read() #
-    f.close()
-    
-    numOfRow = oldRow + 1
-
-    with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
-        reader = csv.reader(fd)
-        rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
-    try:
-        ser = serial.Serial(
-            port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
-            baudrate = 9600,
-            parity=serial.PARITY_NONE,
-            stopbits=serial.STOPBITS_ONE,
-            bytesize=serial.EIGHTBITS, 
-            timeout=1
-        )
-
-        b = bytes(rowToSend, 'utf-8')
-        ser.write(b)
-        ser.close()
-    except:
-        print("com failed")
-
-    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
-    f.write(numOfRow) #write the number of the row that got sent to the text file
-    f.close()
