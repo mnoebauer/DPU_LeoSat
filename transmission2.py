@@ -75,7 +75,6 @@ def transmit():
         At last the index of the row gets wirtten to the file again.
     """
 
-
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.OUT)
     
@@ -83,7 +82,7 @@ def transmit():
     oldRow = f.read() 
     f.close()
         
-    numOfRow = float(oldRow) + 1
+    numOfRow = int(oldRow) + 1
 
     with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
         reader = csv.reader(fd)
@@ -97,6 +96,7 @@ def transmit():
             bytesize=serial.EIGHTBITS, 
             timeout=1
     )
+
     GPIO.output(27,1)
     c = ",".join(str(element)for element in rowToSend) #converting list to string
     b = bytes(c, 'utf-8')
