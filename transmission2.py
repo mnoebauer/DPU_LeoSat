@@ -12,7 +12,7 @@ class Transmission:
     """
     def send():
         """
-        send function
+        Function to send sensor datat to radio pcb via UART
         """
         sleep(1)
         while True:
@@ -42,8 +42,8 @@ def waitForResponse():
     
     try:
         ser = serial.Serial(
-            port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
-             baudrate = 9600,
+            port='/dev/ttyAMA0', #
+            baudrate = 9600,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
             bytesize=serial.EIGHTBITS, 
@@ -69,13 +69,13 @@ def transmit():
         At last the index of the row gets wirtten to the file again.
     """
 
-    f = open('/home/pi/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
     oldRow = f.read() #
     f.close()
         
     numOfRow = oldRow + 1
 
-    with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
+    with open("/home/pi/DPU_LeoSat/data/ldata.csv") as fd:
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
