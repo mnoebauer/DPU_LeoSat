@@ -98,7 +98,7 @@ def transmit():
             bytesize=serial.EIGHTBITS, 
             timeout=1
     )
-    GPIO.output(27,1)
+    GPIO.output(27,0)
     c = ",".join(str(element)for element in rowToSend) #converting list to string
     b = bytes(c, 'utf-8')
     ser.write(b)
