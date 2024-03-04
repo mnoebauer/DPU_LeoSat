@@ -79,7 +79,7 @@ def transmit():
     GPIO.setup(27,GPIO.OUT)
     
     f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
-    oldRow = f.read() 
+    oldRow = f.readline() 
     f.close()
     
     print(oldRow)
