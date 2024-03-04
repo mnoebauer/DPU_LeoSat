@@ -80,20 +80,20 @@ def transmit():
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
-    try:
-        ser = serial.Serial(
+    
+    ser = serial.Serial(
             port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
              baudrate = 9600,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
             bytesize=serial.EIGHTBITS, 
             timeout=1
-        )
-        b = bytes(rowToSend, 'utf-8')
-        ser.write(b)
-        ser.close()
-    except:
-        print("com failed")
+    )
+    b = bytes(rowToSend, 'utf-8')
+    ser.write(b)
+    ser.close()
+    
+    #print("com failed")
 
     #f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
     #f.write(str(numOfRow)) #write the number of the row that got sent to the text file
