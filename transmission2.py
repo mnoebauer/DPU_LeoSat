@@ -27,7 +27,7 @@ class Transmission:
                 print("No responnse, not transmitting")
             '''
             transmit()
-            sleep(2)
+            sleep(3)
 
 def activateCom():
     """
