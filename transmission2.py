@@ -53,6 +53,7 @@ def waitForResponse():
         print("Serial init failed")
 
     response  = ser.read()
+    ser.write("Hallo")
     print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
     print(str(decResponse))
