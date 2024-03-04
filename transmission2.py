@@ -10,11 +10,11 @@ class Transmission:
     """
     Class for transmitting the data to the communication pcb
     """
-    async def send():
+    def send():
         """
         Function to send sensor datat to radio pcb via UART
         """
-        await asyncio.sleep(10)
+        sleep(10)
         while True:
             '''
             activateCom()
@@ -27,7 +27,7 @@ class Transmission:
                 print("No responnse, not transmitting")
             '''
             transmit()
-            await asyncio.sleep(3)
+            sleep(3)
 
 def activateCom():
     """
