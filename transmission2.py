@@ -46,7 +46,7 @@ def waitForResponse():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.IN)
 
-    channel = GPIO.wait_for_edge(27, GPIO_RISING, timeout = 1000)
+    channel = GPIO.wait_for_edge(27, GPIO.RISING, timeout = 1000)
     if channel is None:
         r = False
     else:
