@@ -32,7 +32,7 @@ def activateCom():
     Sending a High Signal to communication pcb to wake up the controller
     """
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.OUT,initial = GPIO.LOW)
+    GPIO.setup(27,GPIO.OUT)
 
     GPIO.output(27,1)
     sleep(0.1)
