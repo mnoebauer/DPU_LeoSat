@@ -31,7 +31,7 @@ def activateCom():
     """
     Sending a High Signal to communication pcb to wake up the controller
     """
-    GPIO.setmode(GPIO.Board)
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.OUT,initial = GPIO.LOW)
 
     GPIO.output(27,1)
@@ -43,7 +43,7 @@ def waitForResponse():
     Setting pin to input and waiting 1 second for an acknowledge from the communication pcb.
     If acknowledge came within that time, the variable gets set true, if not the on false.
     """
-    GPIO.setmode(GPIO.Board)
+    GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.IN)
 
     channel = GPIO.wait_for_edge(27, GPIO_RISING, timeout = 1000)
