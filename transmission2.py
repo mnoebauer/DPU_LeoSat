@@ -56,6 +56,7 @@ def waitForResponse():
     print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
     print(str(decResponse))
+    ser.close()
     if decResponse == 1:
         return True
     else:
