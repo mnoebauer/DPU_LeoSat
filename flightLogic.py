@@ -77,7 +77,7 @@ async def bootLogic():
                             "Temperatur_HTE501_Outside", "Humidity_HTE501_Outside",
                             "X-Acceleration", "Y-Acceleration", "Z-Acceleration",
                             "Altitude_MS5637", "Latitude", "Longitude", "Altitude_GPS",
-                            "Temperature_EE895", "Co2_EE895", "Pressure_EE895"])
+                            "Temperature_EE895", "Co2_EE895", "Pressure_EE895", "PTC-Temperature"])
 
     #old bootnumber +1
     f = open('/home/pi/DPU_LeoSat/data/bootcycles.txt','w')
