@@ -5,6 +5,7 @@ from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import csv
 import camera
+import transmission2
 
 async def mainFlightLogic():
     """
@@ -18,12 +19,14 @@ async def mainFlightLogic():
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
     cameraObj = camera.camclass()
+    transObj = transmission2.Transmission()
 
     task = asyncio.create_task(bootLogic()) #running boot logic
     await asyncio.wait_for(task,5)
 
     mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
+    mainTasks.append(asyncio.create_task(transObj.send()))
 
     f = open('/home/pi/DPU_LeoSat/data/startaltitude.txt','r') #open startAltitude file in read mode
     startAltitude = f.read()
