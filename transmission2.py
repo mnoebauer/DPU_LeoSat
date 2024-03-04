@@ -73,7 +73,7 @@ def transmit():
     oldRow = f.read() #
     f.close()
         
-    numOfRow = int(oldRow) + 1
+    numOfRow = float(oldRow) + 1
 
     with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
         reader = csv.reader(fd)
