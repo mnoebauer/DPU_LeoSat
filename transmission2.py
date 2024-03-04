@@ -75,7 +75,7 @@ def transmit():
         
     numOfRow = int(oldRow) + 1
 
-    with open("/home/pi/DPU_LeoSat/data/ldata.csv") as fd:
+    with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
