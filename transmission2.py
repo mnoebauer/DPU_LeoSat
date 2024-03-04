@@ -95,5 +95,5 @@ def transmit():
         print("com failed")
 
     f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
-    f.write(numOfRow) #write the number of the row that got sent to the text file
+    f.write(str(numOfRow)) #write the number of the row that got sent to the text file
     f.close()
