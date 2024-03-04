@@ -32,10 +32,10 @@ class DataScraper:
             #reading gas resistance
             try:
                 gas,temp_bme,hum_bme,pres_bme = bme688Obj.read()
-                data.append(gas)
-                data.append(temp_bme)
-                data.append(hum_bme)
-                data.append(pres_bme)
+                data.append(round(gas,2))
+                data.append(round(temp_bme,2))
+                data.append(round(hum_bme,2))
+                data.append(round(pres_bme,2))
 
             except:
                 writeToLog("BME688 reading failed")
@@ -47,8 +47,8 @@ class DataScraper:
             #reading temperature and humidity via HTE501 inside
             try:
                 temp,hum = hte501InsideObj.read()
-                data.append(temp)
-                data.append(hum)
+                data.append(round(temp,2))
+                data.append(round(hum,2))
             except:
                 writeToLog("HTE501 Inside reading failed")
                 data.append("NaN")
@@ -57,8 +57,8 @@ class DataScraper:
             #reading temperature and humidity via HTE501 outside
             try:
                 temp_o,hum_o = hte501OutsideObj.read()
-                data.append(temp_o)
-                data.append(hum_o)
+                data.append(round(temp_o,2))
+                data.append(round(hum_o,2))
             except:
                 writeToLog("HTE501 Outside reading failed")
                 data.append("NaN")
@@ -67,9 +67,9 @@ class DataScraper:
             #reading x,y,z acceleration
             try:
                 accx,accy,accz = bma400Obj.read()
-                data.append(accx)
-                data.append(accy)
-                data.append(accz)
+                data.append(round(accx,2))
+                data.append(round(accy,2))
+                data.append(round(accz,2))
             except:
                 writeToLog("BMM400 reading failed")
                 data.append("NaN")
@@ -78,7 +78,7 @@ class DataScraper:
 
             #reading altitude
             try:
-                data.append(m5637Obj.read())
+                data.append(round(m5637Obj.read(),2))
             except:
                 writeToLog("Ms5637 reading failed")
                 data.append("NaN")
@@ -98,9 +98,9 @@ class DataScraper:
             #reading EE895 data
             try:
                 temp_ee,c02_ee,pres_ee = ee895Obj.read()
-                data.append(temp_ee)
-                data.append(c02_ee)
-                data.append(pres_ee)
+                data.append(round(temp_ee,2))
+                data.append(round(c02_ee,2))
+                data.append(round(pres_ee,2))
             except:
                 writeToLog("EE895 reading failed")
                 data.append("NaN")
@@ -112,7 +112,7 @@ class DataScraper:
                 adcvalue = adcObj.read()
                 data.append(adcvalue)
             except:
-                writeToLog("EE895 reading failed")
+                writeToLog("ADC reading failed")
                 data.append("NaN")
 
             writeCsvData(data)
