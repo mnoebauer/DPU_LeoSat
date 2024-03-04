@@ -16,6 +16,7 @@ class Transmission:
         """
         sleep(1)
         while True:
+            '''
             activateCom()
 
             r = waitForResponse()
@@ -24,7 +25,8 @@ class Transmission:
                 transmit()
             else:
                 print("No responnse, not transmitting")
-            
+            '''
+            transmit()
             sleep(2)
 
 def activateCom():
@@ -53,9 +55,9 @@ def waitForResponse():
         print("Serial init failed")
 
     response  = ser.read()
-    sleep(1)
-    ser.write(bytes("H", 'utf-8'))
-    ser.write(bytes("Bye", 'utf-8'))
+    #sleep(1)
+    #ser.write(bytes("H", 'utf-8'))
+    #ser.write(bytes("Bye", 'utf-8'))
     print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
     print(str(decResponse))
@@ -73,6 +75,10 @@ def transmit():
         At last the index of the row gets wirtten to the file again.
     """
 
+
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(27,GPIO.OUT)
+    
     #f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
     #oldRow = f.read() 
     #f.close()
@@ -92,11 +98,12 @@ def transmit():
             bytesize=serial.EIGHTBITS, 
             timeout=1
     )
-
+    GPIO.output(27,1)
     c = ",".join(str(element)for element in rowToSend) #converting list to string
     b = bytes(c, 'utf-8')
     ser.write(b)
     ser.close()
+    GPIO.output(27,0)
     
     #print("com failed")
 
