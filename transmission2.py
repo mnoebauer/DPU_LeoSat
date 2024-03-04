@@ -14,7 +14,7 @@ class Transmission:
         """
         send function
         """
-        sleep(10)
+        sleep(1)
         while True:
             activateCom()
 
@@ -53,7 +53,9 @@ def waitForResponse():
         print("Serial init failed")
 
     response  = ser.read()
+    print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
+    print(str(decResponse))
     if decResponse == 1:
         return True
     else:
