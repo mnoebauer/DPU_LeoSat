@@ -1,5 +1,5 @@
-import transmission
+import transmission2
 import asyncio
 
-transmission.Transmission.transmit()
+transmission2.Transmission.send()
 
