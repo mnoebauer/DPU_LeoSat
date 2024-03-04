@@ -19,7 +19,7 @@ class Transmission:
             activateCom()
 
             r = waitForResponse()
-            
+            sleep(1)
             if r:
                 transmit()
             else:
