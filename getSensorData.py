@@ -86,9 +86,9 @@ class DataScraper:
             #reading gps data
             try:
                 gpstup = gpsObj.read()
-                data.append(gpstup[0])
-                data.append(gpstup[1]) 
-                data.append(gpstup[2]) 
+                data.append(round(gpstup[0],4))
+                data.append(round(gpstup[1],4)) 
+                data.append(round(gpstup[2],4)) 
             except:
                 writeToLog("GPS reading failed")
                 data.append("NaN")
