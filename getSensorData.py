@@ -1,6 +1,6 @@
 import csv
 import asyncio
-from Drivers import bma400, HTE501, ms5637, rtc, bme688, rtc, gps, ee895
+from Drivers import bma400, HTE501, ms5637, rtc, bme688, rtc, gps, ee895, ptc
 
 data = []
 
@@ -19,6 +19,7 @@ class DataScraper:
         hte501InsideObj = HTE501.HTE(0x40) #Object of hte501 class with the i2c adress for the inside sensor
         hte501OutsideObj = HTE501.HTE(0x20) #Object of hte501 class with the i2c adress for the outside sensor
         ee895Obj = ee895.ee895()
+        adcObj = ptc.ptc()
 
         while True:
             #reading time
@@ -104,6 +105,14 @@ class DataScraper:
                 writeToLog("EE895 reading failed")
                 data.append("NaN")
                 data.append("NaN")
+                data.append("NaN")
+
+            #reading adc value
+            try:
+                adcvalue = adcObj.read()
+                data.append(adcvalue)
+            except:
+                writeToLog("EE895 reading failed")
                 data.append("NaN")
 
             writeCsvData(data)

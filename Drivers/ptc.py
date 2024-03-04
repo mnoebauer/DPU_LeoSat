@@ -17,10 +17,4 @@ class ptc():
 
         temp = (results & 0xFFF)/16 #hex to decimal
 
-        print(str(results))
-        print(str(status))
-        print(str(temp))
-
-ptcObj = ptc()
-
-ptcObj.read()
+        return results
