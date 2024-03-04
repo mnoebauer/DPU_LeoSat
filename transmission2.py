@@ -54,7 +54,8 @@ def waitForResponse():
 
     response  = ser.read()
     sleep(1)
-    ser.write(bytes("Hallo", 'utf-8'))
+    ser.write(bytes("H", 'utf-8'))
+    ser.write(bytes("Bye", 'utf-8'))
     print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
     print(str(decResponse))
