@@ -14,6 +14,10 @@ class Transmission:
         """
         Function to send sensor datat to radio pcb via UART
         """
+        
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(27,GPIO.OUT)
+        GPIO.output(27,1)
         sleep(1)
         while True:
             '''
@@ -76,8 +80,6 @@ def transmit():
     """
 
 
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.OUT)
     
     #f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
     #oldRow = f.read() 
@@ -98,12 +100,11 @@ def transmit():
             bytesize=serial.EIGHTBITS, 
             timeout=1
     )
-    GPIO.output(27,1)
+
     c = ",".join(str(element)for element in rowToSend) #converting list to string
     b = bytes(c, 'utf-8')
     ser.write(b)
     ser.close()
-    GPIO.output(27,0)
     
     #print("com failed")
 
