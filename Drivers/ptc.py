@@ -1,4 +1,4 @@
-'''
+
 import board
 import busio
 
@@ -42,3 +42,4 @@ with i2c.I2CMaster() as bus:
 	#Convert the string returned from read to a short intiger
 	results_parse = struct.unpack(">H", results)[0]
 	print(hex(results_parse))
+'''
