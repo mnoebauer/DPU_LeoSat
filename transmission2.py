@@ -79,12 +79,11 @@ def transmit():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(27,GPIO.OUT)
     
-    #f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
-    #oldRow = f.read() 
-    #f.close()
+    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+    oldRow = f.read() 
+    f.close()
         
-    #numOfRow = float(oldRow) + 1
-    numOfRow = 1
+    numOfRow = float(oldRow) + 1
 
     with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
         reader = csv.reader(fd)
@@ -107,6 +106,6 @@ def transmit():
     
     #print("com failed")
 
-    #f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
-    #f.write(str(numOfRow)) #write the number of the row that got sent to the text file
-    #f.close()
+    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
+    f.write(str(numOfRow)) #write the number of the row that got sent to the text file
+    f.close()
