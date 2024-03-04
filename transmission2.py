@@ -3,7 +3,7 @@ import csv
 import asyncio
 import RPi.GPIO as GPIO
 import serial
-import pickle
+import sys
 from time import sleep
 
 class Transmission:
@@ -23,7 +23,7 @@ class Transmission:
             if r:
                 transmit()
             else:
-                print("No respones, not transmitting")
+                print("No responnse, not transmitting")
             
             sleep(5)
 
@@ -39,19 +39,26 @@ def activateCom():
     GPIO.output(27,0)
 
 def waitForResponse():
-    """
-    Setting pin to input and waiting 1 second for an acknowledge from the communication pcb.
-    If acknowledge came within that time, the variable gets set true, if not the on false.
-    """
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.IN)
+    
+    try:
+        ser = serial.Serial(
+            port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+             baudrate = 9600,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            bytesize=serial.EIGHTBITS, 
+            timeout=1
+        )
+    except:
+        print("Serial init failed")
 
-    channel = GPIO.wait_for_edge(27, GPIO.RISING, timeout = 1000)
-    if channel is None:
-        r = False
+    response  = ser.read()
+    decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
+    if decResponse == 1:
+        return True
     else:
-        r = True
-    return r
+        print("answ failed")
+        return False
 
 def transmit():
     """
