@@ -81,7 +81,8 @@ def transmit():
     f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
     oldRow = f.read() 
     f.close()
-        
+    
+    print(oldRow)
     numOfRow = int(oldRow) + 1
 
     with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
