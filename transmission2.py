@@ -25,7 +25,7 @@ class Transmission:
             else:
                 print("No responnse, not transmitting")
             
-            sleep(5)
+            sleep(2)
 
 def activateCom():
     """
@@ -53,6 +53,7 @@ def waitForResponse():
         print("Serial init failed")
 
     response  = ser.read()
+    sleep(1)
     ser.write(bytes("Hallo", 'utf-8'))
     print(str(response))
     decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
