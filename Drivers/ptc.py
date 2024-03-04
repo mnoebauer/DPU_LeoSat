@@ -28,7 +28,7 @@ import quick2wire.i2c as i2c
 import struct
 import sys
 
-address = 0x49     # Address for ADS1110A1
+address = 0x48     # Address for ADS1110A1
 config_byte = 0x8C # what to fill the config register with (default 0x8C)
 
 with i2c.I2CMaster() as bus:
