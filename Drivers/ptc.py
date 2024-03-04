@@ -41,4 +41,4 @@ with i2c.I2CMaster() as bus:
 
 	#Convert the string returned from read to a short intiger
 	results_parse = struct.unpack(">H", results)[0]
-	sys.stdout.write(hex(results_parse))
+	print(hex(results_parse))
