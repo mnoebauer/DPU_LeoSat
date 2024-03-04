@@ -42,7 +42,7 @@ def waitForResponse():
     
     try:
         ser = serial.Serial(
-            port='/dev/ttyAMA0', #
+            port='/dev/ttyAMA0', 
             baudrate = 9600,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
@@ -81,7 +81,8 @@ def transmit():
         reader = csv.reader(fd)
         rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
-    rowToSend = "Test"
+    print(rowToSend)
+    
     ser = serial.Serial(
             port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
              baudrate = 9600,
