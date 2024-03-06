@@ -6,8 +6,9 @@ import getSensorData
 import csv
 import camera
 import transmission2
+import time
 
-async def mainFlightLogic():
+def mainFlightLogic():
     """
     This is the main logic running during the whole flight
     First it calls the boot logic and creates referance values
@@ -22,7 +23,7 @@ async def mainFlightLogic():
 
 
     task = asyncio.create_task(bootLogic()) #running boot logic
-    await asyncio.wait_for(task,5)
+    time.sleep(5)
 
     mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
@@ -42,13 +43,13 @@ async def mainFlightLogic():
         #Check risen Altitude for camera mode
         if rAltitude < 1000 or rAltitude > 34000:
             print("recording video")
-            cameraObj.takeVideo()
+            asyncio.create_task(cameraObj.takeVideo())
 
         else:
             print("taking picture")
-            cameraObj.takePicture()
+            asyncio.create_task(cameraObj.takePicture())
 
-        await asyncio.sleep(60) #refresh
+        time.sleep(60) #refresh
 
 async def bootLogic():
     """
@@ -89,7 +90,7 @@ async def bootLogic():
     f.close()
 
 def main():
-    asyncio.run((mainFlightLogic()))
+    mainFlightLogic()
 
 if __name__ == '__main__':
     main()

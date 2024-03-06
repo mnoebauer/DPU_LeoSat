@@ -1,13 +1,14 @@
 from picamera2 import Picamera2
 from picamera2.encoders import H264Encoder
-from time import sleep
+import asyncio
+
 
 
 class camclass():
         
     picam2 = Picamera2()
 
-    def takePicture(self):
+    async def takePicture(self):
 
         f = open('/home/pi/DPU_LeoSat/data/picturenumber.txt','r') #opening the bootcycles file in read mode
         i = f.readline()
@@ -26,7 +27,7 @@ class camclass():
         f.close()
     
 
-    def takeVideo(self):
+    async def takeVideo(self):
 
         f = open('/home/pi/DPU_LeoSat/data/videonumber.txt','r') 
         i = f.readline()
@@ -38,10 +39,11 @@ class camclass():
         encoder = H264Encoder(bitrate=1000000) 
         output = "vid" + str(i) +".h264"
         self.picam2.start_recording(encoder, output) 
-        sleep(45)
+        await asyncio.sleep(45)
         self.picam2.stop_recording()
 
         i  = int(i) + 1
         f = open('/home/pi/DPU_LeoSat/data/videonumber.txt','w') 
         i = f.write(str(i))
         f.close()
+        
