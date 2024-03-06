@@ -42,11 +42,13 @@ async def mainFlightLogic():
         #Check risen Altitude for camera mode
         if rAltitude < 1000 or rAltitude > 34000:
             print("recording video")
-            asyncio.run(cameraObj.takeVideo())
+            video = cameraObj.takeVideo()
+            asyncio.run(video)
 
         else:
             print("taking picture")
-            asyncio.run(cameraObj.takePicture())
+            picture = cameraObj.takePicture()
+            asyncio.run(picture)
 
         await asyncio.sleep(60) #refresh
 
