@@ -4,7 +4,7 @@ import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import csv
-import camera
+#import camera
 import transmission2
 
 async def mainFlightLogic():
@@ -18,7 +18,7 @@ async def mainFlightLogic():
     mainTasks = []
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
-    cameraObj = camera.camclass()
+    #cameraObj = camera.camclass()
 
 
     task = asyncio.create_task(bootLogic()) #running boot logic
