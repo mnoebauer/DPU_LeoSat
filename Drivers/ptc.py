@@ -16,5 +16,5 @@ class ptc():
         results, status = self.temp3[0] << 8 | self.temp3[1], self.temp3[2]
 
         temp = (results & 0xFFF)/16 #hex to decimal
-        print("adc"+str(results))
+        
         return results
