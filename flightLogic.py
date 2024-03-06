@@ -18,7 +18,7 @@ async def mainFlightLogic():
     mainTasks = []
     heartbeatObj = heartbeat.heartbeart()
     ms5637Obj = ms5637.ms5637()
-    cameraObj = camera.camclass()
+    #cameraObj = camera.camclass()
     #transObj = transmission2.Transmission()
 
     task = asyncio.create_task(bootLogic()) #running boot logic

@@ -16,16 +16,7 @@ class Transmission:
         """
         await asyncio.sleep(10)
         while True:
-            '''
-            activateCom()
 
-            r = waitForResponse()
-            sleep(1)
-            if r:
-                transmit()
-            else:
-                print("No responnse, not transmitting")
-            '''
             transmit()
             await asyncio.sleep(3)
 
@@ -104,8 +95,6 @@ def transmit():
     ser.write(b)
     ser.close()
     GPIO.output(27,0)
-    
-    #print("com failed")
 
     f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
     f.write(str(numOfRow)) #write the number of the row that got sent to the text file
