@@ -4,7 +4,7 @@ import asyncio
 from Drivers import heartbeat, ms5637, rtc
 import getSensorData
 import csv
-import camera
+#import camera
 import transmission2
 
 async def mainFlightLogic():
