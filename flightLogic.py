@@ -6,9 +6,8 @@ import getSensorData
 import csv
 import camera
 import transmission2
-import time
 
-def mainFlightLogic():
+async def mainFlightLogic():
     """
     This is the main logic running during the whole flight
     First it calls the boot logic and creates referance values
@@ -21,7 +20,9 @@ def mainFlightLogic():
     ms5637Obj = ms5637.ms5637()
     cameraObj = camera.camclass()
 
-    bootLogic() #running boot logic
+
+    task = asyncio.create_task(bootLogic()) #running boot logic
+    await asyncio.wait_for(task,5)
 
     mainTasks.append(asyncio.create_task(heartbeatObj.run())) #Starting the Heartbeat to show the Watchdog that the DPU is running
     mainTasks.append(asyncio.create_task(getSensorData.DataScraper.collectData())) #Start collecting and saving sensor data
@@ -41,15 +42,18 @@ def mainFlightLogic():
         #Check risen Altitude for camera mode
         if rAltitude < 1000 or rAltitude > 34000:
             print("recording video")
-            asyncio.create_task(cameraObj.takeVideo())
+            task = asyncio.create_task(cameraObj.takeVideo())
+            await task
+
 
         else:
             print("taking picture")
-            asyncio.create_task(cameraObj.takePicture())
+            cameraObj.takePicture()
 
-        time.sleep(60) #refresh
 
-def bootLogic():
+        await asyncio.sleep(60) #refresh
+
+async def bootLogic():
     """
     Boot Logic is called first on Boot,
     there is will be a reference for the altitude set
@@ -88,7 +92,7 @@ def bootLogic():
     f.close()
 
 def main():
-    mainFlightLogic()
+    asyncio.run((mainFlightLogic()))
 
 if __name__ == '__main__':
     main()
