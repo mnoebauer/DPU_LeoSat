@@ -116,6 +116,7 @@ class DataScraper:
                 data.append("NaN")
 
             writeCsvData(data)
+            print(str(data))
             data.clear()
             await asyncio.sleep(3)
 
