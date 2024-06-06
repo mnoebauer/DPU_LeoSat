@@ -39,9 +39,8 @@ def transmit():
         print(oldRow)
         numOfRow = int(oldRow) + 1
 
-        with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
-            reader = csv.reader(codecs.open(fd, 'rU', 'uft-16'))
-            rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
+        reader = csv.reader(codecs.open("/home/pi/DPU_LeoSat/data/data.csv", 'rU', 'uft-16'))
+        rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
         ser = serial.Serial(
                 port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
