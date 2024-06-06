@@ -14,50 +14,12 @@ class Transmission:
         """
         Function to send sensor datat to radio pcb via UART
         """
+        print("In 10s sleep")
         await asyncio.sleep(10)
         while True:
-
+            print("in while true")
             transmit()
             await asyncio.sleep(3)
-
-def activateCom():
-    """
-    Sending a High Signal to communication pcb to wake up the controller
-    """
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.OUT)
-
-    GPIO.output(27,1)
-    sleep(0.1)
-    GPIO.output(27,0)
-
-def waitForResponse():
-    
-    try:
-        ser = serial.Serial(
-            port='/dev/ttyAMA0', 
-            baudrate = 9600,
-            parity=serial.PARITY_NONE,
-            stopbits=serial.STOPBITS_ONE,
-            bytesize=serial.EIGHTBITS, 
-            timeout=1
-        )
-    except:
-        print("Serial init failed")
-
-    response  = ser.read()
-    #sleep(1)
-    #ser.write(bytes("H", 'utf-8'))
-    #ser.write(bytes("Bye", 'utf-8'))
-    print(str(response))
-    decResponse = int.from_bytes(response, byteorder=sys.byteorder) 
-    print(str(decResponse))
-    ser.close()
-    if decResponse == 1:
-        return True
-    else:
-        print("answ failed")
-        return False
 
 def transmit():
     """
