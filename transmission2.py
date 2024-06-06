@@ -27,37 +27,39 @@ def transmit():
         increments that und gets the new row. Then establishes the UART connection an sends the data.
         At last the index of the row gets wirtten to the file again.
     """
+    try:
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(27,GPIO.OUT)
+        
+        f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
+        oldRow = f.readline() 
+        f.close()
+        
+        print(oldRow)
+        numOfRow = int(oldRow) + 1
 
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(27,GPIO.OUT)
-    
-    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
-    oldRow = f.readline() 
-    f.close()
-    
-    print(oldRow)
-    numOfRow = int(oldRow) + 1
+        with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
+            reader = csv.reader(fd)
+            rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
-    with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
-        reader = csv.reader(fd)
-        rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
+        ser = serial.Serial(
+                port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
+                baudrate = 9600,
+                parity=serial.PARITY_NONE,
+                stopbits=serial.STOPBITS_ONE,
+                bytesize=serial.EIGHTBITS, 
+                timeout=1
+        )
 
-    ser = serial.Serial(
-            port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
-             baudrate = 9600,
-            parity=serial.PARITY_NONE,
-            stopbits=serial.STOPBITS_ONE,
-            bytesize=serial.EIGHTBITS, 
-            timeout=1
-    )
+        GPIO.output(27,1)
+        c = ",".join(str(element)for element in rowToSend) #converting list to string
+        b = bytes(c, 'utf-8')
+        ser.write(b)
+        ser.close()
+        GPIO.output(27,0)
 
-    GPIO.output(27,1)
-    c = ",".join(str(element)for element in rowToSend) #converting list to string
-    b = bytes(c, 'utf-8')
-    ser.write(b)
-    ser.close()
-    GPIO.output(27,0)
-
-    f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
-    f.write(str(numOfRow)) #write the number of the row that got sent to the text file
-    f.close()
+        f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','w') #opening the lastDataSent.txt file in write mode
+        f.write(str(numOfRow)) #write the number of the row that got sent to the text file
+        f.close()
+    except Exception as e: 
+        print(e)
