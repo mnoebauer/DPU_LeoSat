@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 import serial
 import sys
 from time import sleep
+import codecs
 
 class Transmission:
     """
@@ -39,7 +40,7 @@ def transmit():
         numOfRow = int(oldRow) + 1
 
         with open("/home/pi/DPU_LeoSat/data/data.csv") as fd:
-            reader = csv.reader(fd)
+            reader = csv.reader(codecs.open(fd, 'rU', 'uft-16'))
             rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
 
         ser = serial.Serial(
