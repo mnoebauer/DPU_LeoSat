@@ -33,15 +33,19 @@ def transmit():
         GPIO.setup(27,GPIO.OUT)
         
         f = open('/home/pi/DPU_LeoSat/data/lastDataSent.txt','r') #opening the systemlog text file in append mode
-        oldRow = f.readline() 
+        oldRow = f.readline()
         f.close()
         
         print(oldRow)
         numOfRow = int(oldRow) + 1
-
+        """
         with open("/home/pi/DPU_LeoSat/data/data.csv", newline= '', encoding ='utf-8') as fd:
             reader = csv.reader(fd)
             rowToSend = [row for idx, row in enumerate(reader) if idx == numOfRow]
+        """
+        with open("/home/pi/DPU_LeoSat/data/data.csv", newline= '', encoding ='utf-8') as fd:
+            reader = csv.reader(fd)
+            rowToSend = fd.readlines()[-1]
 
         ser = serial.Serial(
                 port='/dev/ttyAMA0', #Replace ttyS0 with ttyAM0 for Pi1,Pi2,Pi0
@@ -53,7 +57,8 @@ def transmit():
         )
 
         GPIO.output(27,1)
-        c = ",".join(str(element)for element in rowToSend) #converting list to string
+        #c = ",".join(str(element)for element in rowToSend) #converting list to string
+        c = rowToSend
         b = bytes(c, 'utf-8')
         ser.write(b)
         ser.close()
